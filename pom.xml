@@ -3,12 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.lyz</groupId>
-	<artifactId>lyz</artifactId>
+	<groupId>com.ynyes.cqhome</groupId>
+	<artifactId>huyue</artifactId>
 	<version>1.0</version>
-
-	<name>lyz</name>
-	<description>lyz project for ynyes</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -259,7 +256,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>com.ynyes.lyz.LyzApplication</start-class>
+		<start-class>com.ynyes.huyue.HuyueApplication</start-class>
 		<java.version>1.7</java.version>
 	</properties>
 
