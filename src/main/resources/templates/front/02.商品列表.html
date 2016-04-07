@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>商品列表</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="copyright" content="" />
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<!-- css -->
+<link href="stylesheets/common.css" rel="stylesheet" type="text/css" />
+<link href="stylesheets/main.css" rel="stylesheet" type="text/css" />
+<!-- js -->
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+</head>
+<style type="text/css">
+.search_box {
+  overflow: hidden;
+  z-index: 99;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+  width: 0px;
+  overflow: hidden;
+  -webkit-transition: 1s;
+  border-radius: 0.32rem;
+  margin-top: 0.19rem;
+  height: 0.52rem;
+}
+.search_box input {
+  float: left;
+  height: 0.5rem;
+}
+.search_box .text {
+  width: 70%;
+  padding-left: 0.2rem;
+  background: white;
+}
+.search_box .sub {
+  float: right;
+  width: 19%;
+  background: url(images/top_header_search.png) no-repeat center;
+  background-size: 0.3rem 0.3rem;
+}
+</style>
+<script type="text/javascript">
+	$(function(){
+		list_choice();
+		
+		(function(){
+			var oBtn = $('.header_search');
+			var oBox =  $('.search_box');
+			var tBtn = $('.goods_list');
+			oBtn.click(function(){
+				$(this).hide();
+				oBox.css({width:'80%',border:'#cc1421 1px solid'});
+				return false;
+			});
+			tBtn.click(function(){
+				oBtn.show(1000);
+				oBox.css({width:'0px',border:'none'});
+				return false;
+			});
+		})();
+	});
+</script>
+<body class="body_gray">
+<!-- header_top -->
+<section class="container">
+	<div class="top_heater">
+		<a href="#" title="" class="header_back"></a>
+		<span>商品分类</span>
+		<a class="header_search"></a>
+		<form class="search_box">
+			<input class="text" type="text" placeholder="请输入搜索内容" name="" id="" value="" />
+			<input class="sub" type="submit" name="" id="" value="" />
+		</form>
+	</div>
+</section>
+<!-- header_top end -->
+<!-- good list -->
+<div class="list_select">
+	<div class="list_box">
+		<span class="name">产品名称</span>
+		<label class="guide"></label>
+		<dl class="choice_goods">
+			<dt>
+				<span>全部产品<label>(26456)</label></span>
+				<span>虎跃气动钉枪<label>(26456)</label></span>
+				<span>保温枪A型钉枪配件<label>(26456)</label></span>
+				<span>保温枪C型(加长)钉枪配件<label>(26456)</label></span>
+			</dt>
+			<dd>
+				<div>
+					<a><span>全部</span><label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+				</div>
+				<div>
+					<a><span>全部</span><label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+				</div>
+				<div>
+					<a><span>全部</span><label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+				</div>
+				<div>
+					<a><span>全部</span><label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+					<a href="#" title="">直钉枪<label>321</label></a>
+				</div>
+			</dd>
+		</dl>
+	</div>
+	<div class="list_box">
+		<span class="name">价格排序</span>
+		<label class="guide"></label>
+	</div>
+</div>
+<ul class="goods_list">
+	<li>
+		<a href="#" title="">
+			<img alt="" src="images/good01.png"/>
+		</a>
+		<p class="name">蚊钉枪P622-A</p>
+		<label class="money">￥169.00</label>
+		<span class="paid">1人已买</span>
+	</li>
+	<li>
+		<a href="#" title="">
+			<img alt="" src="images/good01.png"/>
+		</a>
+		<p class="name">蚊钉枪P622-A</p>
+		<label class="money">￥169.00</label>
+		<span class="paid">1人已买</span>
+	</li>
+	<li>
+		<a href="#" title="">
+			<img alt="" src="images/good03.png"/>
+		</a>
+		<p class="name">蚊钉枪P622-A</p>
+		<label class="money">￥169.00</label>
+		<span class="paid">1人已买</span>
+	</li>
+	<li>
+		<a href="#" title="">
+			<img alt="" src="images/good04.png"/>
+		</a>
+		<p class="name">蚊钉枪P622-A</p>
+		<label class="money">￥169.00</label>
+		<span class="paid">1人已买</span>
+	</li>
+	<li>
+		<a href="#" title="">
+			<img alt="" src="images/good05.png"/>
+		</a>
+		<p class="name">蚊钉枪P622-A</p>
+		<label class="money">￥169.00</label>
+		<span class="paid">1人已买</span>
+	</li>
+	<li>
+		<a href="#" title="">
+			<img alt="" src="images/good02.png"/>
+		</a>
+		<p class="name">蚊钉枪P622-A</p>
+		<label class="money">￥169.00</label>
+		<span class="paid">1人已买</span>
+	</li>
+</ul>
+<!-- good list end -->
+</body>
+</html>

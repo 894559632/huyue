@@ -1,0 +1,464 @@
+@charset "UTF-8";
+/* line 4, ../sass/_base_set.scss */
+.best_goods .box .main_box .left label, .best_goods .box .main_box .right div label, .hot_goods .box .main_box div label {
+  color: #cc1421; }
+
+/* line 7, ../sass/_base_set.scss */
+.box .index_title span {
+  background: #cc1421; }
+
+/* line 11, ../sass/_base_set.scss */
+.box .index_title span {
+  color: white; }
+
+/* line 14, ../sass/_base_set.scss */
+.integral, .index_nav, .best_goods, .hot_goods {
+  background: white; }
+
+/* line 20, ../sass/_base_set.scss */
+.integral, .index_nav, .best_goods .box .index_title, .best_goods .box .main_box, .hot_goods .box .index_title, .hot_goods .box .main_box {
+  width: 90%;
+  padding: 0 5%; }
+
+/* line 25, ../sass/_base_set.scss */
+.search {
+  width: 90%;
+  margin: 0 5%; }
+
+/* line 29, ../sass/_base_set.scss */
+.integral, .index_nav, .best_goods, .adv, .hot_goods {
+  margin-top: 0.2rem; }
+
+/* line 35, ../sass/_base_set.scss */
+.search form, .box {
+  width: 100%;
+  margin: auto;
+  height: 100%; }
+
+/* line 40, ../sass/_base_set.scss */
+.choice_goods dt span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical; }
+
+/* line 3, ../sass/_same.scss */
+.body_gray {
+  background: #f2f2f2; }
+
+/* line 6, ../sass/_same.scss */
+.box .index_title {
+  height: 0.68rem;
+  line-height: 0.68rem;
+  width: 100%; }
+
+/* line 11, ../sass/_same.scss */
+.integral .main_box .swiper-container p, .best_goods .box .main_box .left p, .hot_goods .box .main_box div p {
+  font-size: 0.28rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical; }
+
+/* line 19, ../sass/_same.scss */
+.best_goods .box .main_box .left label, .best_goods .box .main_box .right div label, .hot_goods .box .main_box div label {
+  font-size: 0.26rem; }
+
+/* line 25, ../sass/_same.scss */
+.name {
+  text-align: left;
+  font-size: 0.24rem;
+  line-height: 0.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; }
+
+/* line 36, ../sass/_same.scss */
+.money {
+  float: left;
+  color: #cc1421;
+  font-size: 0.28rem; }
+
+/* line 42, ../sass/_same.scss */
+.paid {
+  float: right;
+  color: #999999;
+  font-size: 0.2rem; }
+
+/* 00.index */
+/* line 8, ../sass/main.scss */
+.search {
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  left: 0px;
+  top: 0.6rem;
+  z-index: 99;
+  height: 0.5rem;
+  border-radius: 0.05rem;
+  background: rgba(255, 255, 255, 0.8);
+  color: #999999;
+  font-size: 0.24rem; }
+  /* line 19, ../sass/main.scss */
+  .search form {
+    height: 100%; }
+  /* line 23, ../sass/main.scss */
+  .search input {
+    float: right;
+    height: 100%;
+    border: none;
+    width: 56%;
+    padding-left: 0.48rem;
+    background: url(../images/search.png) no-repeat 0.09rem;
+    background-size: 0.3rem; }
+    /* line 31, ../sass/main.scss */
+    .search input:focus {
+      width: 90%;
+      -moz-transition: 1s;
+      -o-transition: 1s;
+      -webkit-transition: 1s;
+      transition: 1s; }
+
+/* integral */
+/* line 38, ../sass/main.scss */
+.integral {
+  height: 2.5rem; }
+  /* line 44, ../sass/main.scss */
+  .integral .index_title label {
+    background: url(../images/index_tilte01.png) no-repeat left;
+    background-size: 1.4rem 0.3rem; }
+  /* line 49, ../sass/main.scss */
+  .integral .main_box {
+    width: 100%;
+    height: 1.82rem; }
+    /* line 52, ../sass/main.scss */
+    .integral .main_box .swiper-container {
+      float: left;
+      width: 100%; }
+      /* line 55, ../sass/main.scss */
+      .integral .main_box .swiper-container a {
+        margin: auto;
+        display: block;
+        width: 1.25rem;
+        height: 1.82rem;
+        text-align: center; }
+        /* line 61, ../sass/main.scss */
+        .integral .main_box .swiper-container a img {
+          width: 98%; }
+      /* line 65, ../sass/main.scss */
+      .integral .main_box .swiper-container p {
+        line-height: 0.57rem;
+        text-align: center;
+        color: #444444; }
+
+/* line 80, ../sass/main.scss */
+.box .index_title label {
+  float: left;
+  width: 1.4rem;
+  height: 0.68rem;
+  background: url(../images/index_tilte01.png) no-repeat left;
+  background-size: 1.4rem 0.3rem; }
+/* line 87, ../sass/main.scss */
+.box .index_title span {
+  float: right;
+  width: 1.2rem;
+  height: 0.28rem;
+  margin-top: 0.2rem;
+  line-height: 0.28rem;
+  text-align: center;
+  border-radius: 0.14rem;
+  font-size: 0.2rem;
+  font-weight: 600; }
+/* line 100, ../sass/main.scss */
+.box .index_title a {
+  float: right;
+  width: 0.28rem;
+  height: 0.68rem;
+  background: url(../images/right_guide.png) no-repeat right;
+  background-size: 0.16rem; }
+
+/* line 110, ../sass/main.scss */
+.index_nav {
+  height: 1.52rem; }
+  /* line 116, ../sass/main.scss */
+  .index_nav .box li {
+    float: left;
+    width: 25%;
+    text-align: center; }
+    /* line 120, ../sass/main.scss */
+    .index_nav .box li a {
+      display: block;
+      width: 100%;
+      height: 0.74rem;
+      text-align: center;
+      margin-top: 0.2rem; }
+      /* line 126, ../sass/main.scss */
+      .index_nav .box li a img {
+        width: 0.74rem; }
+    /* line 130, ../sass/main.scss */
+    .index_nav .box li p {
+      line-height: 0.58rem;
+      text-align: center; }
+
+/* line 138, ../sass/main.scss */
+.best_goods {
+  width: 100%;
+  height: 3.7rem; }
+  /* line 145, ../sass/main.scss */
+  .best_goods .box .index_title {
+    border-bottom: #eeeeee 1px solid; }
+    /* line 148, ../sass/main.scss */
+    .best_goods .box .index_title label {
+      background: url(../images/index_tilte02.png) no-repeat left;
+      background-size: 1.4rem 0.3rem; }
+  /* line 153, ../sass/main.scss */
+  .best_goods .box .main_box {
+    height: 3.01rem; }
+    /* line 156, ../sass/main.scss */
+    .best_goods .box .main_box .left {
+      width: 49.5%;
+      float: left;
+      height: 3rem;
+      text-align: center; }
+      /* line 161, ../sass/main.scss */
+      .best_goods .box .main_box .left p {
+        line-height: 0.6rem; }
+      /* line 168, ../sass/main.scss */
+      .best_goods .box .main_box .left a {
+        margin: auto;
+        display: block;
+        width: 1.95rem;
+        height: 1.95rem;
+        text-align: center; }
+      /* line 175, ../sass/main.scss */
+      .best_goods .box .main_box .left img {
+        width: 98%; }
+    /* line 179, ../sass/main.scss */
+    .best_goods .box .main_box .right {
+      width: 49.5%;
+      float: right;
+      height: 3rem;
+      text-align: center;
+      border-left: #eeeeee 1px solid; }
+      /* line 185, ../sass/main.scss */
+      .best_goods .box .main_box .right div {
+        width: 100%;
+        height: 1.49rem; }
+        /* line 188, ../sass/main.scss */
+        .best_goods .box .main_box .right div p {
+          margin-top: 0.15rem;
+          line-height: 0.4rem;
+          font-size: 0.28rem;
+          float: left;
+          width: 50%; }
+          /* line 194, ../sass/main.scss */
+          .best_goods .box .main_box .right div p span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical; }
+        /* line 205, ../sass/main.scss */
+        .best_goods .box .main_box .right div a {
+          float: left;
+          display: block;
+          width: 50%;
+          height: 1.35rem;
+          text-align: center; }
+        /* line 212, ../sass/main.scss */
+        .best_goods .box .main_box .right div img {
+          width: 98%; }
+      /* line 216, ../sass/main.scss */
+      .best_goods .box .main_box .right div:nth-of-type(1) {
+        border-bottom: #eeeeee 1px solid; }
+
+/* line 224, ../sass/main.scss */
+.adv {
+  width: 100%;
+  height: 1.6rem; }
+  /* line 228, ../sass/main.scss */
+  .adv img {
+    width: 100%; }
+
+/* line 233, ../sass/main.scss */
+.hot_goods {
+  width: 100%; }
+  /* line 239, ../sass/main.scss */
+  .hot_goods .box .index_title {
+    border-bottom: #eeeeee 1px solid; }
+    /* line 242, ../sass/main.scss */
+    .hot_goods .box .index_title label {
+      background: url(../images/index_tilte02.png) no-repeat left;
+      background-size: 1.4rem 0.3rem; }
+  /* line 247, ../sass/main.scss */
+  .hot_goods .box .main_box {
+    overflow: hidden; }
+    /* line 250, ../sass/main.scss */
+    .hot_goods .box .main_box div {
+      height: 3.82rem;
+      width: 49.8%;
+      float: left;
+      padding-top: 0.3rem;
+      border-left: #eeeeee 1px solid;
+      border-bottom: #eeeeee 1px solid;
+      text-align: center; }
+      /* line 258, ../sass/main.scss */
+      .hot_goods .box .main_box div a {
+        margin: auto;
+        display: block;
+        width: 2.5rem;
+        height: 2.5rem;
+        text-align: center; }
+      /* line 265, ../sass/main.scss */
+      .hot_goods .box .main_box div img {
+        width: 98%; }
+      /* line 268, ../sass/main.scss */
+      .hot_goods .box .main_box div p {
+        line-height: 0.46rem; }
+    /* line 276, ../sass/main.scss */
+    .hot_goods .box .main_box div:nth-of-type(2n+1) {
+      border-left: none; }
+
+/* 01.登录  */
+/* line 282, ../sass/main.scss */
+.onload .top_heater {
+  background: none;
+  border: none; }
+  /* line 285, ../sass/main.scss */
+  .onload .top_heater .onload_header {
+    color: white; }
+
+/* line 289, ../sass/main.scss */
+.onload_back {
+  background: url(../images/onload_header_back.png) no-repeat center;
+  background-size: 0.18rem 0.3rem; }
+
+/* 02.商品列表 */
+/* line 296, ../sass/main.scss */
+.goods_list {
+  overflow: hidden;
+  width: 6.4rem;
+  margin: auto; }
+  /* line 300, ../sass/main.scss */
+  .goods_list li {
+    float: left;
+    width: 2.7rem;
+    padding: 0.4rem 0.2rem 0.2rem 0.2rem;
+    margin-left: 0.2rem;
+    margin-top: 0.2rem;
+    background: white; }
+    /* line 307, ../sass/main.scss */
+    .goods_list li a {
+      overflow: hidden;
+      display: block;
+      width: 2.7rem;
+      height: 2.7rem;
+      text-align: center; }
+      /* line 313, ../sass/main.scss */
+      .goods_list li a img {
+        width: 98%; }
+    /* line 317, ../sass/main.scss */
+    .goods_list li p {
+      text-align: center; }
+    /* line 320, ../sass/main.scss */
+    .goods_list li label, .goods_list li span {
+      line-height: 0.46rem; }
+  /* line 322, ../sass/main.scss */
+  .goods_list li:nth-of-type(2n+1) {
+    margin-left: 0; }
+
+/* line 327, ../sass/main.scss */
+.list_select {
+  width: 100%;
+  height: 0.7rem;
+  background: white; }
+  /* line 331, ../sass/main.scss */
+  .list_select .list_box {
+    float: left;
+    width: 50%;
+    height: 100%; }
+    /* line 335, ../sass/main.scss */
+    .list_select .list_box .name {
+      display: block;
+      text-align: center;
+      line-height: 0.7rem;
+      text-align: center;
+      font-size: 0.28rem;
+      color: #999; }
+    /* line 343, ../sass/main.scss */
+    .list_select .list_box .guide {
+      position: absolute;
+      right: 0.4rem;
+      top: 0rem;
+      width: 0.4rem;
+      height: 0.7rem;
+      background: url(../images/select_down.png) no-repeat center; }
+    /* line 351, ../sass/main.scss */
+    .list_select .list_box .up {
+      background: url(../images/select_uo.png) no-repeat center; }
+
+/* line 356, ../sass/main.scss */
+.choice_goods {
+  display: none;
+  overflow: hidden;
+  z-index: 99;
+  position: absolute;
+  left: 0px;
+  top: 0.7rem;
+  width: 200%;
+  height: 4rem; }
+  /* line 365, ../sass/main.scss */
+  .choice_goods dt {
+    background: #f8fafa;
+    width: 50%;
+    float: left;
+    height: 4rem;
+    overflow-y: auto; }
+    /* line 371, ../sass/main.scss */
+    .choice_goods dt span {
+      font-size: 0.2rem;
+      padding: 0 8%;
+      line-height: 0.64rem;
+      height: 0.64rem;
+      border-top: #f8fafa 1px solid;
+      border-bottom: #f8fafa 1px solid; }
+    /* line 380, ../sass/main.scss */
+    .choice_goods dt span.active_span {
+      background: white;
+      border-top: #dddddd 1px solid;
+      border-bottom: #dddddd 1px solid; }
+    /* line 385, ../sass/main.scss */
+    .choice_goods dt span:nth-of-type(1) {
+      border-top: #dddddd 1px solid; }
+  /* line 389, ../sass/main.scss */
+  .choice_goods dd {
+    float: left;
+    background: white;
+    width: 50%;
+    height: 4rem;
+    overflow-y: auto; }
+    /* line 395, ../sass/main.scss */
+    .choice_goods dd div {
+      display: none; }
+      /* line 397, ../sass/main.scss */
+      .choice_goods dd div a {
+        font-size: 0.2rem;
+        padding: 0 8%;
+        display: block;
+        line-height: 0.64rem; }
+        /* line 402, ../sass/main.scss */
+        .choice_goods dd div a label {
+          float: right; }
+        /* line 405, ../sass/main.scss */
+        .choice_goods dd div a span {
+          color: #e64b49; }
+      /* line 409, ../sass/main.scss */
+      .choice_goods dd div a:nth-of-type(1) {
+        border-top: #dddddd 1px solid; }
+    /* line 413, ../sass/main.scss */
+    .choice_goods dd div:nth-of-type(1) {
+      display: block; }
