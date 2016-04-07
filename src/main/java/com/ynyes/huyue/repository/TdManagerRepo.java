@@ -14,4 +14,5 @@ public interface TdManagerRepo
 	 * @author DengXiao
 	 */
 	TdManager findByUsernameAndPassword(String username, String password);
+	
 }

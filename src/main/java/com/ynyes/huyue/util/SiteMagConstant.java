@@ -21,19 +21,16 @@ public class SiteMagConstant {
    
     public static String backupPath; 
     public static String imagePath;
-    public static String alipayReturnUrl;
     
     static{
 		Properties props = System.getProperties();
 		String operation = props.getProperty("os.name");
 		if(operation.contains("Linux")){
 			backupPath = "/mnt/root/backup/";
-			imagePath = "/mnt/root/images/goods";
-			alipayReturnUrl = "http://101.200.128.65:8080/pay/alipay/return";
+			imagePath = "/mnt/root/images/huyue";
 		}else{
 			backupPath = "src/main/resources/backup/";
 			imagePath = "src/main/resources/static/images";
-			alipayReturnUrl = "http://127.0.0.1:8080/pay/alipay/return";
 		}
     }
 }
