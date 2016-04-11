@@ -10,6 +10,7 @@ import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 /**
  * 广告
  * 
@@ -20,138 +21,150 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class TdAd {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+	
+    // 名称
+    @Column
+    private String title;
+    
+    // 副标题
+    @Column
+    private String subtitle;
+    
+    // 类型
+    @Column
+    private Long typeId;
+    
+    // 创建时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+    
+    // 开始时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date startTime;
+    
+    // 到期时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date endTime;
+    
+    // 排序号
+    @Column
+    private Long sortId;
 
-	// 名称
-	@Column
-	private String title;
+    // 是否使能
+    @Column
+    private Boolean isEnable;
+    
+    // 文件地址
+    @Column
+    private String fileUri;
+    
+    // 链接地址
+    @Column
+    private String linkUri;
+    
+    // 备注
+    @Column
+    private String mark;
 
-	// 类型
-	@Column
-	private Long typeId;
+    public Long getId() {
+        return id;
+    }
 
-	// 创建时间
-	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date createTime;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	// 开始时间
-	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date startTime;
+    public String getTitle() {
+        return title;
+    }
 
-	// 到期时间
-	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date endTime;
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	// 排序号
-	@Column
-	private Double sortId;
+    public Long getTypeId() {
+        return typeId;
+    }
 
-	// 是否使能
-	@Column
-	private Boolean isEnable;
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
+    }
 
-	// 文件地址
-	@Column
-	private String fileUri;
-
-	// 链接地址
-	@Column
-	private String linkUri;
-
-	// 备注
-	@Column
-	private String mark;
-
-	public Long getId() {
-		return id;
+    public String getSubtitle() {
+		return subtitle;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public Long getTypeId() {
-		return typeId;
-	}
-
-	public void setTypeId(Long typeId) {
-		this.typeId = typeId;
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
 	}
 
 	public Date getCreateTime() {
-		return createTime;
-	}
+        return createTime;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public Date getStartTime() {
-		return startTime;
-	}
+    public Date getStartTime() {
+        return startTime;
+    }
 
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
 
-	public Date getEndTime() {
-		return endTime;
-	}
+    public Date getEndTime() {
+        return endTime;
+    }
 
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
 
-	public Double getSortId() {
-		return sortId;
-	}
+    public Long getSortId() {
+        return sortId;
+    }
 
-	public void setSortId(Double sortId) {
-		this.sortId = sortId;
-	}
+    public void setSortId(Long sortId) {
+        this.sortId = sortId;
+    }
 
-	public Boolean getIsEnable() {
-		return isEnable;
-	}
+    public Boolean getIsEnable() {
+        return isEnable;
+    }
 
-	public void setIsEnable(Boolean isEnable) {
-		this.isEnable = isEnable;
-	}
+    public void setIsEnable(Boolean isEnable) {
+        this.isEnable = isEnable;
+    }
 
-	public String getFileUri() {
-		return fileUri;
-	}
+    public String getFileUri() {
+        return fileUri;
+    }
 
-	public void setFileUri(String fileUri) {
-		this.fileUri = fileUri;
-	}
+    public void setFileUri(String fileUri) {
+        this.fileUri = fileUri;
+    }
 
-	public String getLinkUri() {
-		return linkUri;
-	}
+    public String getLinkUri() {
+        return linkUri;
+    }
 
-	public void setLinkUri(String linkUri) {
-		this.linkUri = linkUri;
-	}
+    public void setLinkUri(String linkUri) {
+        this.linkUri = linkUri;
+    }
 
-	public String getMark() {
-		return mark;
-	}
+    public String getMark() {
+        return mark;
+    }
 
-	public void setMark(String mark) {
-		this.mark = mark;
-	}
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
 }

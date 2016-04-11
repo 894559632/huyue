@@ -1,56 +1,157 @@
 package com.ynyes.huyue.service;
 
+import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.huyue.entity.TdAd;
 import com.ynyes.huyue.repository.TdAdRepo;
 
+/**
+ * TdAd 服务类
+ * 
+ * @author Sharon
+ *
+ */
+
 @Service
 @Transactional
 public class TdAdService {
-
-	@Autowired
-	private TdAdRepo repository;
-
-	public TdAd save(TdAd e) {
-		if (null == e) {
-			return null;
-		}
-		return repository.save(e);
-	}
-
-	public void delete(Long id) {
-		if (null != id) {
-			repository.delete(id);
-		}
-	}
-
-	public TdAd findOne(Long id) {
-		if (null == id) {
-			return null;
-		}
-		return repository.findOne(id);
-	}
-
-	public List<TdAd> findAll() {
-		return (List<TdAd>) repository.findAll();
-	}
-
-	/**
-	 * 根据位置查找广告
-	 * 
-	 * @author DengXiao
+    
+    @Autowired
+    TdAdRepo repository;
+    
+    /**
+     * 删除
+     * 
+     * @param id 菜单项ID
+     */
+    public void delete(Long id)
+    {
+        if (null != id)
+        {
+            repository.delete(id);
+        }
+    }
+    
+    /**
+     * 删除
+     * 
+     * @param e 菜单项
+     */
+    public void delete(TdAd e)
+    {
+        if (null != e)
+        {
+            repository.delete(e);
+        }
+    }
+    
+    public void delete(List<TdAd> entities)
+    {
+        if (null != entities)
+        {
+            repository.delete(entities);
+        }
+    }
+    
+    /**
+     * 查找
+     * 
+     * @param id ID
+     * @return
+     */
+    public TdAd findOne(Long id)
+    {
+        if (null == id)
+        {
+            return null;
+        }
+        
+        return repository.findOne(id);
+    }
+    
+    /**
+     * 查找
+     * 
+     * @param ids
+     * @return
+     */
+    public List<TdAd> findAll(Iterable<Long> ids)
+    {
+        return (List<TdAd>) repository.findAll(ids);
+    }
+    
+    public List<TdAd> findAll()
+    {
+        return (List<TdAd>) repository.findAll();
+    }
+    
+    public List<TdAd> findByTypeIdAndEndtimeAfter(Long typeId)
+    {
+        return repository.findByTypeIdAndEndTimeAfterOrderBySortIdAsc(typeId, new Date());
+    }
+    
+    public Page<TdAd> findAllOrderBySortIdAsc(int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.ASC, "sortId").and(new Sort(Direction.DESC,"createTime")));
+        
+        return repository.findAll(pageRequest);
+    }
+    
+    public List<TdAd> findAllOrderBySortIdAsc()
+    {
+        return (List<TdAd>) repository.findAll(new Sort(Direction.ASC, "sortId"));
+    }
+    
+    public Page<TdAd> findByTypeIdOrderBySortIdAsc(Long typeId, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.ASC, "sortId").and(new Sort(Direction.DESC,"createTime")));
+    	
+    	return repository.findByTypeId(typeId, pageRequest);
+    }
+    
+    public List<TdAd> findByTypeIdOrderBySortIdAsc(Long typeId){   	
+    	
+    	return repository.findByTypeId(typeId);
+    }
+    
+    /**
+	 * @author lc
+	 * @注释：搜索广告
 	 */
-	public List<TdAd> findByTypeIdOrderBySortIdAsc(Long typeId) {
-		if (null == typeId) {
-			return null;
-		}
-		return repository.findByTypeIdOrderBySortIdAsc(typeId);
-	}
-
+    public Page<TdAd> searchAll(String keywords, int page ,int size){
+    	
+    	PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.ASC, "sortId").and(new Sort(Direction.DESC,"createTime")));
+        
+        return repository.findByTitleContainingOrSubtitleContaining(keywords, keywords, pageRequest);
+    }
+    
+    /**
+     * 保存
+     * 
+     * @param e
+     * @return
+     */
+    public TdAd save(TdAd e)
+    {
+        if (null == e.getCreateTime())
+        {
+            e.setCreateTime(new Date());
+        }
+        
+        return repository.save(e);
+    }
+    
+    public List<TdAd> save(List<TdAd> entities)
+    {
+        
+        return (List<TdAd>) repository.save(entities);
+    }
 }

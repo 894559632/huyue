@@ -1,55 +1,140 @@
 package com.ynyes.huyue.service;
 
+import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.huyue.entity.TdManager;
 import com.ynyes.huyue.repository.TdManagerRepo;
 
+/**
+ * TdManager 服务类
+ * 
+ * @author Sharon
+ *
+ */
+
 @Service
 @Transactional
 public class TdManagerService {
-
-	@Autowired
-	private TdManagerRepo repository;
-
-	public TdManager save(TdManager e) {
-		if (null == e) {
-			return null;
-		}
-		return repository.save(e);
-	}
-
-	public void delete(Long id) {
-		if (null != id) {
-			repository.delete(id);
-		}
-	}
-
-	public TdManager findOne(Long id) {
-		if (null == id) {
-			return null;
-		}
-		return repository.findOne(id);
-	}
-
-	public List<TdManager> findAll() {
-		return (List<TdManager>) repository.findAll();
-	}
-
-	/**
-	 * 根据用户名和密码查找指定的后台用户
-	 * 
-	 * @author DengXiao
-	 */
-	public TdManager findByUsernameAndPassword(String username, String password) {
-		if (null == username || null == password) {
-			return null;
-		}
-		return repository.findByUsernameAndPassword(username, password);
-	}
+    
+    @Autowired
+    TdManagerRepo repository;
+    
+    /**
+     * 删除
+     * 
+     * @param id 菜单项ID
+     */
+    public void delete(Long id)
+    {
+        if (null != id)
+        {
+            repository.delete(id);
+        }
+    }
+    
+    /**
+     * 删除
+     * 
+     * @param e 菜单项
+     */
+    public void delete(TdManager e)
+    {
+        if (null != e)
+        {
+            repository.delete(e);
+        }
+    }
+    
+    public void delete(List<TdManager> entities)
+    {
+        if (null != entities)
+        {
+            repository.delete(entities);
+        }
+    }
+    
+    /**
+     * 查找
+     * 
+     * @param id ID
+     * @return
+     */
+    public TdManager findOne(Long id)
+    {
+        if (null == id)
+        {
+            return null;
+        }
+        
+        return repository.findOne(id);
+    }
+    
+    public TdManager findByUsernameAndIsEnableTrue(String username)
+    {
+        if (null == username)
+        {
+            return null;
+        }
+        
+        return repository.findByUsernameAndIsEnableTrue(username);
+    }
+    
+    /**
+     * 查找
+     * 
+     * @param ids
+     * @return
+     */
+    public List<TdManager> findAll(Iterable<Long> ids)
+    {
+        return (List<TdManager>) repository.findAll(ids);
+    }
+    
+    public List<TdManager> findAll()
+    {
+        return (List<TdManager>) repository.findAll();
+    }
+    
+    public Page<TdManager> findAllOrderBySortIdAsc(int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.ASC, "sortId"));
+        
+        return repository.findAll(pageRequest);
+    }
+    
+    public List<TdManager> findAllOrderBySortIdAsc()
+    {
+        return (List<TdManager>) repository.findAll(new Sort(Direction.ASC, "sortId"));
+    }
+    
+    /**
+     * 保存
+     * 
+     * @param e
+     * @return
+     */
+    public TdManager save(TdManager e)
+    {
+        if (null == e.getCreateTime())
+        {
+            e.setCreateTime(new Date());
+        }
+        
+        return repository.save(e);
+    }
+    
+    public List<TdManager> save(List<TdManager> entities)
+    {
+        
+        return (List<TdManager>) repository.save(entities);
+    }
 }

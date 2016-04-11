@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Language" content="zh-CN">
-<title>暂无标题</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="copyright" content="" />
+<title><#if setting??>${setting.title!''}-${setting.seoTitle!''}</#if></title>
+<meta name="keywords" content="<#if setting??>${setting.seoKeywords!''}</#if>">
+<meta name="description" content="<#if setting??>${setting.seoDescription!''}</#if>">
+<meta name="copyright" content="<#if setting??>${setting.copyright!''}</#if>" />
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1">
 <meta content="yes" name="apple-mobile-web-app-capable">
 <meta content="black" name="apple-mobile-web-app-status-bar-style">
@@ -26,31 +26,17 @@
 <div class="index_banner">
 	<div class="swiper-container" style="width: 100%;height: 100%;">
 	 	<div class="swiper-wrapper">
-		    <div class="swiper-slide blue-slide">
-		    	<a href="#">	    		
-			    	<img src="/touch/images/banner.png"/>
-		    	</a>
-		    </div>
-		    <div class="swiper-slide red-slide">
-		    	<a href="#">	    		
-			    	<img src="/touch/images/banner.png"/>
-		    	</a>
-		    </div>
-		    <div class="swiper-slide orange-slide">
-		    	<a href="#">	    		
-			    	<img src="/touch/images/banner.png"/>
-		    	</a>
-		    </div>
-		    <div class="swiper-slide orange-slide">
-		    	<a href="#">	    		
-			    	<img src="/touch/images/banner.png"/>
-		    	</a>
-		    </div>
-		    <div class="swiper-slide orange-slide">
-		    	<a href="#">	    		
-			    	<img src="/touch/images/banner.png"/>
-		    	</a>
-		    </div>
+	 		<#if touch_top_ad??>
+	 			<#list touch_top_ad as item>
+	 				<#if item??>
+					    <div class="swiper-slide blue-slide">
+					    	<a href="${item.linkUri!''}">	    		
+						    	<img src="${item.fileUri!''}"/>
+					    	</a>
+					    </div>
+				    </#if>
+			    </#list>
+		    </#if>
 	  	</div>
 	  	<div class="swiper-pagination"></div>
 	</div>

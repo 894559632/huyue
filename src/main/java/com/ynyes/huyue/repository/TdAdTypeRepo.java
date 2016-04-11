@@ -5,12 +5,16 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.ynyes.huyue.entity.TdAdType;
 
-public interface TdAdTypeRepo extends PagingAndSortingRepository<TdAdType, Long>, JpaSpecificationExecutor<TdAdType> {
+/**
+ * TdAdType 实体数据库操作接口
+ * 
+ * @author Sharon
+ *
+ */
 
-	/**
-	 * 根据广告位名称查找指定的广告位
-	 * 
-	 * @author DengXiao
-	 */
-	TdAdType findByTitle(String title);
+public interface TdAdTypeRepo extends
+		PagingAndSortingRepository<TdAdType, Long>,
+		JpaSpecificationExecutor<TdAdType> 
+{
+    TdAdType findByTitle(String title);
 }

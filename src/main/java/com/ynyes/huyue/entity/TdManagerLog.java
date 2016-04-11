@@ -7,87 +7,92 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 /**
- * 管理员日志实体类
+ * 管理员日志
  * 
- * @author DengXiao
+ * @author Sharon
+ *
  */
+
 @Entity
 public class TdManagerLog {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
+    // 用户名
+    @Column
+    private String username;
+    
+    // 操作类型
+    @Column
+    private String actionType;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    // 备注
+    @Column
+    private String mark;
+    
+    // IP
+    @Column
+    private String ip;
+    
+    // 创建时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createTime;
 
-	// 操作类型
-	@Column
-	private String type;
+    public Long getId() {
+        return id;
+    }
 
-	// 用户名
-	@Column
-	private String username;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	// 用户真实姓名
-	@Column
-	private String realName;
+    public String getUsername() {
+        return username;
+    }
 
-	// 备注
-	@Column
-	private String remark;
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	// 操作时间
-	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date operateTime;
+    public String getActionType() {
+        return actionType;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setActionType(String actionType) {
+        this.actionType = actionType;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getMark() {
+        return mark;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public String getIp() {
+        return ip;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public String getRealName() {
-		return realName;
-	}
-
-	public void setRealName(String realName) {
-		this.realName = realName;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public Date getOperateTime() {
-		return operateTime;
-	}
-
-	public void setOperateTime(Date operateTime) {
-		this.operateTime = operateTime;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 }

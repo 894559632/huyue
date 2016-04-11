@@ -5,14 +5,16 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.ynyes.huyue.entity.TdManager;
 
-public interface TdManagerRepo
-		extends PagingAndSortingRepository<TdManager, Long>, JpaSpecificationExecutor<TdManager> {
+/**
+ * TdManager 实体数据库操作接口
+ * 
+ * @author Sharon
+ *
+ */
 
-	/**
-	 * 根据账号密码查找指定的后台用户
-	 * 
-	 * @author DengXiao
-	 */
-	TdManager findByUsernameAndPassword(String username, String password);
-	
+public interface TdManagerRepo extends
+		PagingAndSortingRepository<TdManager, Long>,
+		JpaSpecificationExecutor<TdManager> 
+{
+    TdManager findByUsernameAndIsEnableTrue(String username);
 }
