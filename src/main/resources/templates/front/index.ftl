@@ -66,77 +66,39 @@
 			<span>天天疯抢</span>
 		</li>
 		<li class="main_box">
-			<!-- swiper ----------------------------------------------->
-				<!-- swiper--------------------------------------------------- -->
-					<div class="swiper-container">
-				        <div class="swiper-wrapper">
-				            <div class="swiper-slide">
-				            	<a class="recommend_good_box" href="#">
-					            	<div>
-					            		<img alt="" src="/touch/images/good01.png"/>
-					            	</div>
-				            	<p>哈尔滨啤酒哈尔滨啤酒哈尔滨啤酒哈尔滨啤酒哈尔滨啤酒哈尔滨啤酒</p>
-				            	</a>
-				            </div>
-				            <div class="swiper-slide">
-				            	<a class="recommend_good_box" href="#">
-					            	<div>
-					            		<img alt="" src="/touch/images/good02.png"/>
-					            	</div>
-					            	<p>哈尔滨啤酒</p>
-				            	</a>
-				            </div>
-				            <div class="swiper-slide">
-				            	<a class="recommend_good_box" href="#">
-					            	<div>
-					            		<img alt="" src="/touch/images/good03.png"/>
-					            	</div>
-					            	<p>哈尔滨啤酒</p>
-				            	</a>
-				            </div>
-				            <div class="swiper-slide">
-				            	<a class="recommend_good_box" href="#">
-					            	<div>
-					            		<img alt="" src="/touch/images/good01.png"/>
-					            	</div>
-					            	<p>哈尔滨啤酒</p>
-				            	</a>
-				            </div>
-				            <div class="swiper-slide">
-				            	<a class="recommend_good_box" href="#">
-					            	<div>
-					            		<img alt="" src="/touch/images/good04.png"/>
-					            	</div>
-					            	<p>哈尔滨啤酒</p>
-				            	</a>
-				            </div>
-				            <div class="swiper-slide">
-				            	<a class="recommend_good_box" href="#">
-					            	<div>
-					            		<img alt="" src="/touch/images/good01.png"/>
-					            	</div>
-					            	<p>哈尔滨啤酒</p>
-				            	</a>
-				            </div>
-				        </div>				     
-				        <!-- Add Pagination -->
-				        <!-- Add Arrows -->
-				    </div>
-				    <!--<div class="swiper-pagination"></div>-->
-				    <!-- Swiper JS -->
-				
-				    <!-- Initialize Swiper -->
-				    <script>
-				    var swiper = new Swiper('.integral .swiper-container', {
-				        pagination: '.integral .swiper-pagination',
-				        slidesPerView:4,
-				        paginationClickable: true,
-				        spaceBetween: 30
-
-				    });
-				    </script>
-					<!-- swiper--------------------------------------------------- -->
-				<!-- swiper ----------------------------------------------->
+			<div class="swiper-container">
+		        <div class="swiper-wrapper">
+		        	<#if indexRecommend_point_page??&&indexRecommend_point_page.content??&&indexRecommend_point_page.content?size gt 0>
+			        	<#list indexRecommend_point_page.content as item>
+			        		<#if item??>
+					            <div class="swiper-slide">
+					            	<a class="recommend_good_box" href="/touch/goods/detail/${item.id?c}">
+						            	<div>
+						            		<img alt="<#if setting??>${setting.seoTitle!''}-</#if>${item.seoTitle!''}" src="${item.coverImageUri!''}"/>
+						            	</div>
+					            		<p>${item.title!''}</p>
+					            	</a>
+					            </div>
+				            </#if>
+			            </#list>
+		            </#if>
+		        </div>				     
+		        <!-- Add Pagination -->
+		        <!-- Add Arrows -->
+		    </div>
+		    <!--<div class="swiper-pagination"></div>-->
+		    <!-- Swiper JS -->
+		
+		    <!-- Initialize Swiper -->
+		    <script>
+		    var swiper = new Swiper('.integral .swiper-container', {
+		        pagination: '.integral .swiper-pagination',
+		        slidesPerView:4,
+		        paginationClickable: true,
+		        spaceBetween: 30
+	
+		    });
+		    </script>
 		</li>
 	</ul>
 </section>
@@ -181,38 +143,52 @@
 		</li>
 		<li class="main_box">
 			<div class="left">
-				<p>直钉枪F30-A</p>
-				<label>¥14.50</label>
-				<a href="#" title="">
-					<img alt="" src="/touch/images/good03.png"/>
-				</a>
+				<#if indexRecommend_goods_page??&&indexRecommend_goods_page.content??&&indexRecommend_goods_page.content?size gt 0>
+					<#list indexRecommend_goods_page.content as item>
+						<#if item??&&item_index==0>
+							<p>${item.title!''}</p>
+							<label>¥${item.salePrice?string("0.00")}</label>
+							<a href="/touch/goods/detail/${item.id?c}" title="<#if setting??>${setting.seoTitle!''}-</#if>${item.seoTitle!''}">
+								<img alt="<#if setting??>${setting.seoTitle!''}-</#if>${item.seoTitle!''}" src="${item.coverImageUri!''}"/>
+							</a>
+						</#if>
+					</#list>
+				</#if>
 			</div>
 			<div class="right">
-				<div>
-					<p><span>直钉枪
-F32-A</span><label>¥14.50</label></p>
-					
-					<a href="#" title="">
-						<img alt="" src="/touch/images/good04.png"/>
-					</a>
-				</div>
-				<div>
-					<p><span>直钉枪
-F32-A</span><label>¥14.50</label></p>
-					
-					<a href="#" title="">
-						<img alt="" src="/touch/images/good04.png"/>
-					</a>
-				</div>
+				<#if indexRecommend_goods_page??&&indexRecommend_goods_page.content??&&indexRecommend_goods_page.content?size gt 0>
+					<#list indexRecommend_goods_page.content as item>
+						<#if item??&&item_index==1>
+							<div>
+								<p><span>${item.title!''}</span><label>¥${item.salePrice?string("0.00")}</label></p>
+								<a href="/touch/goods/detail/${item.id?c}" title="<#if setting??>${setting.seoTitle!''}-</#if>${item.seoTitle!''}">
+									<img alt="<#if setting??>${setting.seoTitle!''}-</#if>${item.seoTitle!''}" src="${item.coverImageUri!''}"/>
+								</a>
+							</div>
+						</#if>
+						<#if item??&&item_index==2>
+							<div>
+								<p><span>${item.title!''}</span><label>¥${item.salePrice?string("0.00")}</label></p>
+								<a href="/touch/goods/detail/${item.id?c}" title="<#if setting??>${setting.seoTitle!''}-</#if>${item.seoTitle!''}">
+									<img alt="<#if setting??>${setting.seoTitle!''}-</#if>${item.seoTitle!''}" src="${item.coverImageUri!''}"/>
+								</a>
+							</div>
+						</#if>
+					</#list>
+				</#if>
 			</div>
 		</li>
 	</ul>
 </section>
 <!-- best_goods end -->
 <!-- adv -->
-<section class="adv">
-	<img alt="" src="/touch/images/adv.png"/>
-</section>
+<#if touch_middle_ad??>
+	<a href="${touch_middle_ad.linkUri!''}">
+		<section class="adv">
+			<img alt="" src="${touch_middle_ad.fileUri!''}"/>
+		</section>
+	</a>
+</#if>
 <!-- adv box -->
 <!-- hot_goods -->
 <section class="hot_goods">
@@ -223,83 +199,19 @@ F32-A</span><label>¥14.50</label></p>
 			<span>更多商品</span>
 		</li>
 		<li class="main_box">
-			<div>
-				<a href="#" title="">
-					<img alt="" src="/touch/images/good03.png"/>
-				</a>
-				<label>¥128.00</label>
-				<p>蚊钉枪P622-A</p>
-			</div>
-			<div>
-				<a href="#" title="">
-					<img alt="" src="/touch/images/good03.png"/>
-				</a>
-				<label>¥128.00</label>
-				<p>蚊钉枪P622-A</p>
-			</div>
-			<div>
-				<a href="#" title="">
-					<img alt="" src="/touch/images/good03.png"/>
-				</a>
-				<label>¥128.00</label>
-				<p>蚊钉枪P622-A</p>
-			</div>
-			<div>
-				<a href="#" title="">
-					<img alt="" src="/touch/images/good03.png"/>
-				</a>
-				<label>¥128.00</label>
-				<p>蚊钉枪P622-A</p>
-			</div>
-			<div>
-				<a href="#" title="">
-					<img alt="" src="/touch/images/good03.png"/>
-				</a>
-				<label>¥128.00</label>
-				<p>蚊钉枪P622-A</p>
-			</div>
-			<div>
-				<a href="#" title="">
-					<img alt="" src="/touch/images/good03.png"/>
-				</a>
-				<label>¥128.00</label>
-				<p>蚊钉枪P622-A</p>
-			</div>
-			<div>
-				<a href="#" title="">
-					<img alt="" src="/touch/images/good03.png"/>
-				</a>
-				<label>¥128.00</label>
-				<p>蚊钉枪P622-A</p>
-			</div>
-			<div>
-				<a href="#" title="">
-					<img alt="" src="/touch/images/good03.png"/>
-				</a>
-				<label>¥128.00</label>
-				<p>蚊钉枪P622-A</p>
-			</div>
-			<div>
-				<a href="#" title="">
-					<img alt="" src="/touch/images/good03.png"/>
-				</a>
-				<label>¥128.00</label>
-				<p>蚊钉枪P622-A</p>
-			</div>
-			<div>
-				<a href="#" title="">
-					<img alt="" src="/touch/images/good03.png"/>
-				</a>
-				<label>¥128.00</label>
-				<p>蚊钉枪P622-A</p>
-			</div>
-			<div>
-				<a href="#" title="">
-					<img alt="" src="/touch/images/good03.png"/>
-				</a>
-				<label>¥128.00</label>
-				<p>蚊钉枪P622-A</p>
-			</div>
+			<#if hot_goods_page??&&hot_goods_page.content??&&hot_goods_page.content?size gt 0>
+				<#list hot_goods_page.content as item>
+					<#if item??>
+						<div>
+							<a href="/touch/goods/detail/${item.id?c}" title="<#if setting??>${setting.seoTitle!''}-</#if>${item.seoTitle!''}">
+								<img alt="<#if setting??>${setting.seoTitle!''}-</#if>${item.seoTitle!''}" src="${item.coverImageUri!''}"/>
+							</a>
+							<label>¥${item.salePrice?string("0.00")}</label>
+							<p>${item.title!''}</p>
+						</div>
+					</#if>
+				</#list>
+			</#if>
 		</li>
 	</ul>
 </section>
