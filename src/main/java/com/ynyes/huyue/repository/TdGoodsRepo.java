@@ -308,5 +308,5 @@ public interface TdGoodsRepo extends PagingAndSortingRepository<TdGoods, Long>, 
 
 	Page<TdGoods> findByIsRecommendIndexTrueAndIsOnSaleTrueAndIsPointGoodsTrueOrderBySortIdAsc(Pageable page);
 
-	Page<TdGoods> findByisHotTrueAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySortIdAsc(Pageable page);
+	Page<TdGoods> findByisHotTrueAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySoldNumberDesc(Pageable page);
 }

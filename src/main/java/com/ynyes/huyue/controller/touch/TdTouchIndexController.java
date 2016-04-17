@@ -66,7 +66,7 @@ public class TdTouchIndexController {
 
 		// 获取首页热销商品
 		Page<TdGoods> hot_goods_page = tdGoodsService
-				.findByisHotTrueAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySortIdAsc(0, 10);
+				.findByisHotTrueAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySoldNumberDesc(0, 10);
 		map.addAttribute("hot_goods_page", hot_goods_page);
 
 		// 获取网站设置信息

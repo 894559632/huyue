@@ -213,7 +213,7 @@
     border-bottom: #eeeeee 1px solid; }
     /* line 148, ../sass/main.scss */
     .best_goods .box .index_title label {
-      background: url(../images/index_tilte02.png) no-repeat left;
+      background: url(../images/diy_header.png) no-repeat left;
       background-size: 1.4rem 0.3rem; }
   /* line 153, ../sass/main.scss */
   .best_goods .box .main_box {
@@ -292,7 +292,7 @@
     border-bottom: #eeeeee 1px solid; }
     /* line 242, ../sass/main.scss */
     .hot_goods .box .index_title label {
-      background: url(../images/index_tilte02.png) no-repeat left;
+      background: url(../images/hot_header.png) no-repeat left;
       background-size: 1.4rem 0.3rem; }
   /* line 247, ../sass/main.scss */
   .hot_goods .box .main_box {

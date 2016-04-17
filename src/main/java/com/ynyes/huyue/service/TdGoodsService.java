@@ -2039,8 +2039,8 @@ public class TdGoodsService {
 		return repository.findByIsRecommendIndexTrueAndIsOnSaleTrueAndIsPointGoodsTrueOrderBySortIdAsc(pageRequest);
 	}
 
-	public Page<TdGoods> findByisHotTrueAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySortIdAsc(int page, int size) {
+	public Page<TdGoods> findByisHotTrueAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySoldNumberDesc(int page, int size) {
 		PageRequest pageRequest = new PageRequest(page, size);
-		return repository.findByisHotTrueAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySortIdAsc(pageRequest);
+		return repository.findByisHotTrueAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySoldNumberDesc(pageRequest);
 	}
 }
