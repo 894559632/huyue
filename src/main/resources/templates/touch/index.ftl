@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Language" content="zh-CN">
-<title><#if setting??>${setting.title!''}-${setting.seoTitle!''}</#if></title>
+<title><#if setting??>${setting.title!''}-</#if>首页</title>
 <meta name="keywords" content="<#if setting??>${setting.seoKeywords!''}</#if>">
 <meta name="description" content="<#if setting??>${setting.seoDescription!''}</#if>">
 <meta name="copyright" content="<#if setting??>${setting.copyright!''}</#if>" />
@@ -119,8 +119,8 @@
 			<p>抽奖</p>
 		</li>
 		<li>
-			<a href="#" title="">
-				<img alt="" src="/touch/images/nav_icon03.png"/>
+			<a href="/touch/user/collect" title="<#if setting??>${setting.title!''}-</#if>收藏">
+				<img alt="<#if setting??>${setting.title!''}-</#if>收藏" src="/touch/images/nav_icon03.png"/>
 			</a>
 			<p>收藏</p>
 		</li>
@@ -220,38 +220,38 @@
 <!-- footer -->
 <section class="footer">
 	<nav>
-		<a href="#" title="">
+		<a href="javascript:void(0);" title="<#if setting??>${setting.title!''}-</#if>首页">
 			<span>
-				<img class="active_img" alt="" src="/touch/images/footer_icon01.png"/>
-				<img class="disable_img" alt="" src="/touch/images/footer_icon11.png"/>
+				<img class="active_img" alt="<#if setting??>${setting.title!''}-</#if>首页" src="/touch/images/footer_icon01.png"/>
+				<img class="disable_img" alt="<#if setting??>${setting.title!''}-</#if>首页" src="/touch/images/footer_icon11.png"/>
 			</span>
 			<label class="active_label">首页</label>
 		</a>
-		<a href="#" title="">
+		<a href="#" title="<#if setting??>${setting.title!''}-</#if>分类">
 			<span>
-				<img alt="" src="/touch/images/footer_icon02.png"/>
-				<img alt="" src="/touch/images/footer_icon22.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>分类" src="/touch/images/footer_icon02.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>分类" src="/touch/images/footer_icon22.png"/>
 			</span>
 			<label>分类</label>
 		</a>
-		<a href="#" title="">
+		<a href="#" title="<#if setting??>${setting.title!''}-</#if>购物车">
 			<span>
-				<img alt="" src="/touch/images/footer_icon03.png"/>
-				<img alt="" src="/touch/images/footer_icon33.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>购物车" src="/touch/images/footer_icon03.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>购物车" src="/touch/images/footer_icon33.png"/>
 			</span>
 			<label>购物车</label>
 		</a>
-		<a href="#" title="">
+		<a href="#" title="<#if setting??>${setting.title!''}-</#if>抽奖">
 			<span>
-				<img alt="" src="/touch/images/footer_icon04.png"/>
-				<img alt="" src="/touch/images/footer_icon44.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/footer_icon04.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/footer_icon44.png"/>
 			</span>
 			<label>抽奖</label>
 		</a>
-		<a href="#" title="">
+		<a href="/touch/user" title="<#if setting??>${setting.title!''}-</#if>我">
 			<span>
-				<img alt="" src="/touch/images/footer_icon05.png"/>
-				<img alt="" src="/touch/images/footer_icon55.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>我" src="/touch/images/footer_icon05.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>我" src="/touch/images/footer_icon55.png"/>
 			</span>
 			<label>我</label>
 		</a>

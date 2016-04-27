@@ -34,6 +34,10 @@ public class TdUser {
 	@Column
 	private String city;
 
+	// 城市id
+	@Column
+	private Long cityId;
+
 	// 真实姓名
 	@Column
 	private String realName;
@@ -41,6 +45,10 @@ public class TdUser {
 	// 电话号码
 	@Column
 	private String mobile;
+	
+	//用户头像
+	@Column
+	private String headImgUri;
 
 	// 性别
 	@Column
@@ -70,6 +78,20 @@ public class TdUser {
 	// 会员积分
 	@Column(scale = 2)
 	private Double point;
+
+	// 注册时间
+	@Column
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date registDate;
+
+	// 上次登录时间
+	@Column
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date lastLoginTime;
+
+	// 是否启用
+	@Column
+	private Boolean isEnable;
 
 	// 排序号
 	@Column(scale = 2)
@@ -105,6 +127,14 @@ public class TdUser {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public Long getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(Long cityId) {
+		this.cityId = cityId;
 	}
 
 	public String getRealName() {
@@ -185,5 +215,37 @@ public class TdUser {
 
 	public void setSortId(Double sortId) {
 		this.sortId = sortId;
+	}
+
+	public Boolean getIsEnable() {
+		return isEnable;
+	}
+
+	public void setIsEnable(Boolean isEnable) {
+		this.isEnable = isEnable;
+	}
+
+	public Date getRegistDate() {
+		return registDate;
+	}
+
+	public void setRegistDate(Date registDate) {
+		this.registDate = registDate;
+	}
+
+	public Date getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+
+	public String getHeadImgUri() {
+		return headImgUri;
+	}
+
+	public void setHeadImgUri(String headImgUri) {
+		this.headImgUri = headImgUri;
 	}
 }
