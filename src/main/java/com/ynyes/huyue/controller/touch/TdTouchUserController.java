@@ -52,6 +52,18 @@ public class TdTouchUserController {
 		return "/touch/user_center";
 	}
 
+	@RequestMapping(value = "/info")
+	public String touchUserInfo(HttpServletRequest req, ModelMap map) {
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			return "redirect:/touch/login";
+		}
+
+		TdUser user = tdUserService.findByUsername(username);
+		map.addAttribute("user", user);
+		return "/touch/user_info";
+	}
+
 	@RequestMapping(value = "/collect")
 	public String touchUserCollect(HttpServletRequest req, ModelMap map, String param) {
 		String username = (String) req.getSession().getAttribute("username");

@@ -44,7 +44,7 @@ public class TdTouchGoodsController {
 			goods_page = tdGoodsService.findAll(0, ClientConstant.pageSize);
 		} else {
 			// 查询指定分类下的商品
-			goods_page = tdGoodsService.findbycategoryId
+			// goods_page = tdGoodsService.findbycategoryId
 		}
 
 		map.addAttribute("goods_page", goods_page);
