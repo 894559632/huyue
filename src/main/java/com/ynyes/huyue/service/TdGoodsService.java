@@ -15,10 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.huyue.entity.TdBrand;
 import com.ynyes.huyue.entity.TdGoods;
-import com.ynyes.huyue.entity.TdGoodsParameter;
 import com.ynyes.huyue.entity.TdPriceChangeLog;
 import com.ynyes.huyue.entity.TdProductCategory;
-import com.ynyes.huyue.entity.TdUser;
 import com.ynyes.huyue.repository.TdGoodsRepo;
 
 /**
