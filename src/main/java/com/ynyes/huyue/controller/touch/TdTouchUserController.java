@@ -1,5 +1,7 @@
 package com.ynyes.huyue.controller.touch;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +11,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ynyes.huyue.entity.TdSetting;
+import com.ynyes.huyue.entity.TdShippingAddress;
 import com.ynyes.huyue.entity.TdUser;
 import com.ynyes.huyue.entity.TdUserCollect;
 import com.ynyes.huyue.service.TdSettingService;
+import com.ynyes.huyue.service.TdShippingAddressService;
 import com.ynyes.huyue.service.TdUserCollectService;
 import com.ynyes.huyue.service.TdUserService;
 import com.ynyes.huyue.util.ClientConstant;
@@ -35,6 +39,9 @@ public class TdTouchUserController {
 
 	@Autowired
 	private TdUserCollectService tdUserCollectService;
+
+	@Autowired
+	private TdShippingAddressService tdShippingAddressService;
 
 	@RequestMapping
 	public String touchUser(HttpServletRequest req, ModelMap map) {
@@ -125,5 +132,22 @@ public class TdTouchUserController {
 
 		map.addAttribute("param", param);
 		return "/touch/user_collect";
+	}
+
+	@RequestMapping(value = "/address")
+	public String touchUserAddress(HttpServletRequest req, ModelMap map) {
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			return "/touch/login";
+		}
+
+		List<TdShippingAddress> address_list = tdShippingAddressService.findByUsername(username);
+		map.addAttribute("address_list", address_list);
+
+		// 获取网站设置信息
+		TdSetting setting = tdSettingService.findTopBy();
+		map.addAttribute("setting", setting);
+
+		return "/touch/user_address";
 	}
 }

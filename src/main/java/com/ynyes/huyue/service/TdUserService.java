@@ -96,6 +96,19 @@ public class TdUserService {
 	}
 
 	/**
+	 * 根据用户名查找启用的用户
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 创建时间：2016年5月2日下午3:08:56
+	 */
+	public TdUser findByUsernameAndIsEnableTrue(String username) {
+		if (null == username) {
+			return null;
+		}
+		return repository.findByUsernameAndIsEnableTrue(username);
+	}
+
+	/**
 	 * 根据用户名查找非指定id的用户
 	 * 
 	 * @author 作者：DengXiao

@@ -25,6 +25,14 @@ public interface TdUserRepo extends PagingAndSortingRepository<TdUser, Long>, Jp
 	TdUser findByUsername(String username);
 
 	/**
+	 * 根据用户名查找启用的用户
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 创建时间：2016年5月2日下午3:08:56
+	 */
+	TdUser findByUsernameAndIsEnableTrue(String username);
+
+	/**
 	 * 根据用户名查找非指定id的用户
 	 * 
 	 * @author 作者：DengXiao
@@ -38,5 +46,5 @@ public interface TdUserRepo extends PagingAndSortingRepository<TdUser, Long>, Jp
 	 * @author 作者：DengXiao
 	 * @version 创建时间：2016年4月26日下午8:26:19
 	 */
-	Page<TdUser> findByUsernameContainingOrderBySortIdAsc(String keywords,Pageable page);
+	Page<TdUser> findByUsernameContainingOrderBySortIdAsc(String keywords, Pageable page);
 }

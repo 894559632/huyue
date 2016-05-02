@@ -48,7 +48,7 @@
 <!-- 分类1 -->
 <div class="l_classify1">
 	<a href="#" title=""><p>积分中心</p></a>
-	<a href="#" title=""><p>我的收藏</p></a>
+	<a href="/touch/user/collect" title="<#if setting??>${setting.title!''}-</#if>我的收藏"><p>我的收藏</p></a>
 	<a href="#" title=""><p>历史记录</p></a>
 </div>
 <!-- 分类1-结束 -->
@@ -56,7 +56,7 @@
 <div class="l_classify2">
 	<a href="/touch/user/info" title="<#if setting??>${setting.title!''}-</#if>个人信息"><p>个人信息</p></a>
 	<a href="#" title=""><p>修改密码</p></a>
-	<a href="#" title=""><p>收货地址</p></a>
+	<a href="/touch/user/address" title="<#if setting??>${setting.title!''}-</#if>收货地址"><p>收货地址</p></a>
 	<a href="#" title=""><p>积分抽奖</p></a>
 	<a href="#" title=""><p>意见反馈</p></a>
 	<a href="#" title=""><p>客服中心</p></a>
