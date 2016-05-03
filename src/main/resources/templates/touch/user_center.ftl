@@ -26,7 +26,7 @@
 <body class="body_gray">
 <!-- header_top -->
 <dl class="l_ltitle">
-	<dt><a href="#" title="<#if setting??>${setting.title!''}-</#if>用户中心"><img src="${user.headImageUri!''}" alt="<#if setting??>${setting.title!''}-</#if>用户中心"></a></dt>
+	<dt><a href="/touch/user/info" title="<#if setting??>${setting.title!''}-</#if>用户中心"><img src="${user.headImageUri!''}" alt="<#if setting??>${setting.title!''}-</#if>用户中心"></a></dt>
 	<dd class="dd1">${user.username!''}</dd>
 	<#--
 	<dd class="dd2">152*****608</dd>
@@ -49,7 +49,7 @@
 <div class="l_classify1">
 	<a href="#" title=""><p>积分中心</p></a>
 	<a href="/touch/user/collect" title="<#if setting??>${setting.title!''}-</#if>我的收藏"><p>我的收藏</p></a>
-	<a href="#" title=""><p>历史记录</p></a>
+	<a href="/touch/user/visited" title="<#if setting??>${setting.title!''}-</#if>历史记录"><p>历史记录</p></a>
 </div>
 <!-- 分类1-结束 -->
 <!-- 分类2 -->

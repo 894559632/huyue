@@ -11,7 +11,7 @@
 <script type="text/javascript" src="/mag/js/swfupload.js"></script>
 <script type="text/javascript" src="/mag/js/swfupload.queue.js"></script>
 <script type="text/javascript" src="/mag/js/swfupload.handlers.js"></script>
-<script type="text/javascript" charset="utf-8" src="/mag/js/kindeditor-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/mag/js/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/mag/js/zh_CN.js"></script>
 <script type="text/javascript" src="/mag/js/layout.js"></script>
 
@@ -525,18 +525,19 @@ function del_goods_comb(obj) {
         </dl>
         
         <dl>
+            <dt>详细描述</dt>
+            <dd>
+                <textarea name="detail" class="editor"><#if goods??>${goods.detail!""}</#if></textarea>
+            </dd>
+        </dl>
+        
+        <dl>
             <dt>详细参数</dt>
             <dd>
                 <textarea name="paramDetail" class="editor"><#if goods??>${goods.paramDetail!""}</#if></textarea>
             </dd>
         </dl>
         
-        <dl>
-            <dt>详细描述</dt>
-            <dd>
-                <textarea name="detail" class="editor"><#if goods??>${goods.detail!""}</#if></textarea>
-            </dd>
-        </dl>
         <dl>
             <dt>售后服务</dt>
             <dd>

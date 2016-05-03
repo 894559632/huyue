@@ -227,7 +227,7 @@
 			</span>
 			<label class="active_label">首页</label>
 		</a>
-		<a href="#" title="<#if setting??>${setting.title!''}-</#if>分类">
+		<a href="/touch/goods" title="<#if setting??>${setting.title!''}-</#if>分类">
 			<span>
 				<img alt="<#if setting??>${setting.title!''}-</#if>分类" src="/touch/images/footer_icon02.png"/>
 				<img alt="<#if setting??>${setting.title!''}-</#if>分类" src="/touch/images/footer_icon22.png"/>

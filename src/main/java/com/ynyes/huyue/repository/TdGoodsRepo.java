@@ -309,4 +309,21 @@ public interface TdGoodsRepo extends PagingAndSortingRepository<TdGoods, Long>, 
 	Page<TdGoods> findByIsRecommendIndexTrueAndIsOnSaleTrueAndIsPointGoodsTrueOrderBySortIdAsc(Pageable page);
 
 	Page<TdGoods> findByisHotTrueAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySoldNumberDesc(Pageable page);
+
+	/**
+	 * 根据分类编号查找上架的非积分商品（不分页）
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 创建时间：2016年5月3日下午3:07:27
+	 */
+	List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySortIdAsc(Long categoryId);
+
+	List<TdGoods> findByIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceAsc();
+
+	List<TdGoods> findByIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceDesc();
+
+	List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceAsc(Long categoryId);
+
+	List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceDesc(Long categoryId);
+
 }

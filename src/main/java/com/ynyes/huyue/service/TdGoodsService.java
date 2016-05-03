@@ -2041,4 +2041,43 @@ public class TdGoodsService {
 		PageRequest pageRequest = new PageRequest(page, size);
 		return repository.findByisHotTrueAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySoldNumberDesc(pageRequest);
 	}
+
+	/**
+	 * 根据分类编号查找上架的非积分商品
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 创建时间：2016年5月3日下午3:07:27
+	 */
+	public List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySortIdAsc(Long categoryId) {
+		if (null == categoryId) {
+			return null;
+		}
+		return repository.findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySortIdAsc(categoryId);
+	}
+
+	public List<TdGoods> findAll() {
+		return (List<TdGoods>) repository.findAll();
+	}
+
+	public List<TdGoods> findByIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceAsc() {
+		return repository.findByIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceAsc();
+	}
+
+	public List<TdGoods> findByIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceDesc() {
+		return repository.findByIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceDesc();
+	}
+
+	public List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceAsc(Long categoryId) {
+		if (null == categoryId) {
+			return null;
+		}
+		return repository.findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceAsc(categoryId);
+	}
+
+	public List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceDesc(Long categoryId) {
+		if (null == categoryId) {
+			return null;
+		}
+		return repository.findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceDesc(categoryId);
+	}
 }
