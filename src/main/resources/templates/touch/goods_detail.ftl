@@ -20,19 +20,38 @@
 <script type="text/javascript" src="/touch/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/touch/js/swiper.min.js"></script>
 <script type="text/javascript" src="/touch/js/common.js"></script>
+<script type="text/javascript" src="/touch/js/DengXiao/base.js"></script>
+<script type="text/javascript" src="/touch/js/DengXiao/goods.js"></script>
 </head>
 <script type="text/javascript">
 	$(function(){
-		//试例
-		var starId = ['set_star','set_star01'];
-		var starNum = ['3','4']
+		var starId = [
+			<#if comment_page??>
+				<#list comment_page.content as item>
+					"set_star${item_index}"				
+					<#if (item_index+1)!=comment_page.content?size>
+						,
+					</#if>
+				</#list>
+			</#if>
+		]
+		var starNum = [
+			<#if comment_page??>
+				<#list comment_page.content as item>
+					"${item.stars!'0'}"				
+					<#if (item_index+1)!=comment_page.content?size>
+						,
+					</#if>
+				</#list>
+			</#if>
+		]
 		for(var i=0;i<starId.length;i++)
 		{
 			set_star('#'+starId[i],starNum[i]);//id + 默认显示个数
 		};
-		
-		//collect fly 收藏效果
-		collectFly();
+		<#--
+			collectFly();
+		-->
 	});
 </script>
 <body class="gray_body">
@@ -47,7 +66,7 @@
 				<a href="#" title="">商品评价</a>
 			</div>
 		</div>
-		<a href="#" title="" class="header_car"></a>
+		<a href="/touch/cart" title="<#if setting??>${setting.title!''}-</#if>购物车" class="header_car"></a>
 	</div>
 </section>
 <!-- header_top end -->
@@ -121,7 +140,7 @@
 							</div>
 						</#if>
 						<div class="store_stare_box">
-							<div id="set_star" class="rich_star">
+							<div id="set_star${item_index}" class="rich_star">
 								<span>
 									<img alt="" src="images/star_no.png">
 									<img alt="" src="images/star_yes.png">
@@ -161,20 +180,20 @@
 	<a class="tel one" title="">
 		<div>
 			<span>
-				<img alt="" src="images/call.png"/>
+				<img alt="" src="/touch/images/call.png"/>
 			</span>
 			<label>客服</label>
 		</div>
 		<div id="yes_star">
-			<span>
-				<img alt="" src="images/star_no.png"/>
-				<img class="yes" id="yes" alt="" src="images/star_yes.png"/>
+			<span onclick="base.goods.collect(${goodsId?c});">
+				<img id="collect_no" alt="<#if setting??>${setting.title!''}-</#if>收藏" src="/touch/images/star_no.png" style="<#if isCollect??&&isCollect>display:none<#else>display:block;</#if>"/>
+				<img class="yes"  id="collect_yes" alt="<#if setting??>${setting.title!''}-</#if>收藏" src="/touch/images/star_yes.png" style="<#if isCollect??&&!isCollect>display:none;<#else>display:block;</#if>"/>
 			</span>
 			<label>收藏</label>
 		</div>
 	</a>
 	<a class="buy two" href="#" title="">立刻购买</a>
-	<a class="car two" href="#" title="">加入购物车</a>
+	<a class="car two" href="javascript:base.goods.addCart(${goodsId?c})" title="<#if setting??>${setting.title!''}-</#if>加入购物车">加入购物车</a>
 </div>
 <!-- buy_now end-->
 </body>

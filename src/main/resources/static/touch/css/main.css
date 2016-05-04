@@ -1311,6 +1311,7 @@
     margin-top: 0.5rem; }
     /* line 1235, ../sass/main.scss */
     .buy_car .box .num input {
+      text-align:center;
       float: left;
       width: 0.6rem;
       height: 0.34rem;

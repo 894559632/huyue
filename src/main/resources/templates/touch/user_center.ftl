@@ -66,38 +66,38 @@
 <!-- footer -->
 <section class="footer">
 	<nav>
-		<a href="/touch" title="<#if setting??>${setting.title!''}-</#if>首页">
+		<a href="javascript:void(0);" title="<#if setting??>${setting.title!''}-</#if>首页">
 			<span>
-				<img alt="" src="/touch/images/footer_icon01.png"/>
-				<img alt="" src="/touch/images/footer_icon11.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>首页" src="/touch/images/footer_icon01.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>首页" src="/touch/images/footer_icon11.png"/>
 			</span>
 			<label>首页</label>
 		</a>
-		<a href="#" title="<#if setting??>${setting.title!''}-</#if>分类">
+		<a href="/touch/goods" title="<#if setting??>${setting.title!''}-</#if>分类">
 			<span>
-				<img alt="" src="/touch/images/footer_icon02.png"/>
-				<img alt="" src="/touch/images/footer_icon22.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>分类" src="/touch/images/footer_icon02.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>分类" src="/touch/images/footer_icon22.png"/>
 			</span>
 			<label>分类</label>
 		</a>
-		<a href="#" title="<#if setting??>${setting.title!''}-</#if>购物车">
+		<a href="/touch/cart" title="<#if setting??>${setting.title!''}-</#if>购物车">
 			<span>
-				<img alt="" src="/touch/images/footer_icon03.png"/>
-				<img alt="" src="/touch/images/footer_icon33.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>购物车" src="/touch/images/footer_icon03.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>购物车" src="/touch/images/footer_icon33.png"/>
 			</span>
 			<label>购物车</label>
 		</a>
 		<a href="#" title="<#if setting??>${setting.title!''}-</#if>抽奖">
 			<span>
-				<img alt="" src="/touch/images/footer_icon04.png"/>
-				<img alt="" src="/touch/images/footer_icon44.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/footer_icon04.png"/>
+				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/footer_icon44.png"/>
 			</span>
 			<label>抽奖</label>
 		</a>
-		<a href="#" title="<#if setting??>${setting.title!''}-</#if>我">
+		<a href="/touch/user" title="<#if setting??>${setting.title!''}-</#if>我">
 			<span>
-				<img alt="" class="active_img" src="/touch/images/footer_icon05.png"/>
-				<img alt="" class="disable_img" src="/touch/images/footer_icon55.png"/>
+				<img class="active_img" alt="<#if setting??>${setting.title!''}-</#if>我" src="/touch/images/footer_icon05.png"/>
+				<img class="disable_img" alt="<#if setting??>${setting.title!''}-</#if>我" src="/touch/images/footer_icon55.png"/>
 			</span>
 			<label class="active_label">我</label>
 		</a>

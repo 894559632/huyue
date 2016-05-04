@@ -188,7 +188,7 @@ function collectFly()
     }else{
     	oStar.style.left = -winWidth + 'px';
     };
-    console.log(oBtn);
+    
     oBtn.onclick = function(){
     	if(onOff){
 	    	oStar.style.WebkitTransition='0.4s ease';

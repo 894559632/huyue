@@ -72,7 +72,7 @@
 			        	<#list indexRecommend_point_page.content as item>
 			        		<#if item??>
 					            <div class="swiper-slide">
-					            	<a class="recommend_good_box" href="/touch/goods/detail/${item.id?c}">
+					            	<a class="recommend_good_box" href="/touch/goods">
 						            	<div>
 						            		<img alt="<#if setting??>${setting.seoTitle!''}-</#if>${item.seoTitle!''}" src="${item.coverImageUri!''}"/>
 						            	</div>
@@ -125,8 +125,8 @@
 			<p>收藏</p>
 		</li>
 		<li>
-			<a href="#" title="">
-				<img alt="" src="/touch/images/nav_icon04.png"/>
+			<a href="/touch/goods" title="<#if setting??>${setting.title!''}-</#if>分类">
+				<img alt="<#if setting??>${setting.title!''}-</#if>分类" src="/touch/images/nav_icon04.png"/>
 			</a>
 			<p>分类</p>
 		</li>
@@ -138,7 +138,7 @@
 	<ul class="box">
 		<li class="index_title">
 			<label></label>
-			<a href="#" title=""></a>
+			<a href="/touch/goods" title="<#if setting??>${setting.title!''}-</#if>更多商品"></a>
 			<span>更多商品</span>
 		</li>
 		<li class="main_box">
@@ -195,7 +195,7 @@
 	<ul class="box">
 		<li class="index_title">
 			<label></label>
-			<a href="#" title=""></a>
+			<a href="touch/goods" title="<#if setting??>${setting.title!''}-</#if>更多商品"></a>
 			<span>更多商品</span>
 		</li>
 		<li class="main_box">
@@ -234,7 +234,7 @@
 			</span>
 			<label>分类</label>
 		</a>
-		<a href="#" title="<#if setting??>${setting.title!''}-</#if>购物车">
+		<a href="/touch/cart" title="<#if setting??>${setting.title!''}-</#if>购物车">
 			<span>
 				<img alt="<#if setting??>${setting.title!''}-</#if>购物车" src="/touch/images/footer_icon03.png"/>
 				<img alt="<#if setting??>${setting.title!''}-</#if>购物车" src="/touch/images/footer_icon33.png"/>

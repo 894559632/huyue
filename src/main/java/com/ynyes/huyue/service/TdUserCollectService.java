@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ynyes.huyue.entity.TdUserCollect;
@@ -150,6 +149,19 @@ public class TdUserCollectService {
 			return null;
 		}
 		return repository.findByUsernameOrderByCollectTimeDesc(username);
+	}
+
+	/**
+	 * 根据用户名和商品id查找收藏
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 创建时间：2016年5月4日上午9:36:24
+	 */
+	public TdUserCollect findByGoodsIdAndUsername(Long goodsId, String username) {
+		if (null == goodsId || null == username) {
+			return null;
+		}
+		return repository.findByGoodsIdAndUsername(goodsId, username);
 	}
 
 }

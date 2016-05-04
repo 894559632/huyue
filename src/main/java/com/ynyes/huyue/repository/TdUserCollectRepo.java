@@ -73,4 +73,12 @@ public interface TdUserCollectRepo
 	 * @version 创建时间：2016年4月27日下午8:54:17
 	 */
 	List<TdUserCollect> findByUsernameOrderByCollectTimeDesc(String username);
+
+	/**
+	 * 根据用户名和商品id查找收藏
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 创建时间：2016年5月4日上午9:36:24
+	 */
+	TdUserCollect findByGoodsIdAndUsername(Long goodsId, String username);
 }

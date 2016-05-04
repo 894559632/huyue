@@ -8,9 +8,19 @@ var base = {
 		return document.getElementById(id);
 	},
 	getT : function(tagName) {
-		return document.getElementByTagName(tagName);
+		return document.getElementsByTagName(tagName);
 	},
 	getC : function(className) {
-		return document.getElementByClassName(className);
+		return document.getElementsByClassName(className);
+	},
+	contains : function(array, obj) {
+		var isHave = false;
+		for (var i = 0; i < array.length; i++) {
+			if (array[i] == obj) {
+				isHave = true;
+				break;
+			}
+		}
+		return isHave;
 	}
 };
