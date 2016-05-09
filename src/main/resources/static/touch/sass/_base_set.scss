@@ -1,0 +1,85 @@
+@charset "UTF-8";
+//color
+//red
+%red{
+    color: $red_color;
+}
+%redbd{
+    background:$red_color;
+}
+//white
+%white{
+    color: white;
+}
+%whitebd{
+    background: white;
+}
+
+//paading  5%  white bd
+%pw{
+    @extend %p05;
+     @extend %whitebd;
+}
+
+//padding and margin
+//padding
+%p05{
+    width: 90%;
+    padding: 0 5%;
+}
+//margin
+%m05{
+    width: 90%;
+    margin: 0 5%;
+}
+%mt02{
+    margin-top: 0.2rem;
+}
+
+//box setting
+//box
+%box{
+    width: 100%;
+    margin: auto;
+    height: 100%;
+}
+%text_save1{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+%text_save2{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+//底部红色按钮
+.footer_btn{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 0.8rem;
+    background: #da251e;
+    text-align: center;
+    line-height: 0.8rem;
+    color: white;
+    font-size: 0.28rem;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+

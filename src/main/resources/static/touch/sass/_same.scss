@@ -1,0 +1,87 @@
+@charset "UTF-8";
+//body 背景
+.body_gray{
+    background: #f2f2f2;
+    height: 100%;
+    }
+
+//index 相同的tilte  占位符
+%index_title{
+    height: 0.68rem;
+    line-height: 0.68rem;
+    width: 100%;
+}
+%index_p{
+    font-size: 0.28rem;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+%index_label{
+    @extend %red;
+    font-size: 0.26rem;
+}
+////////////////
+//商品名称
+.name{
+    text-align: left;
+    font-size: 0.24rem;
+    line-height: 0.4rem;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+//价格样式
+.money{
+    float: left;
+    color: $red_color;
+    font-size: 0.28rem;
+}
+//已经购买样式
+.paid{
+    float: right;
+    color: $gray_color;
+    font-size: 0.2rem;
+}
+///////////////////////////////////////////
+.btn_fill_box{
+    width: 100%;
+    float: left;
+    height: 0.8rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

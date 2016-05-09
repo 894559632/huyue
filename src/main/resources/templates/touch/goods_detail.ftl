@@ -76,11 +76,13 @@
 	 	<div class="swiper-wrapper">
 	 		<#if goods??&&goods.showPictures??>
 	 			<#list goods.showPictures?split(",") as item>
-				    <div class="swiper-slide blue-slide">
-				    	<a href="#">	    		
-					    	<img src="${item}"/>
-				    	</a>
-				    </div>
+	 				<#if item??&&""!=item>
+					    <div class="swiper-slide blue-slide">
+					    	<a href="#">	    		
+						    	<img src="${item}"/>
+					    	</a>
+					    </div>
+				    </#if>
 			    </#list>
 		    </#if>
 	  	</div>

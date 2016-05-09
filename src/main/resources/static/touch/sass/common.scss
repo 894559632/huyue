@@ -1,0 +1,224 @@
+@charset "utf-8";
+@import "_mixin";
+
+/* CSS Document */
+* {padding: 0;margin: 0;}
+html {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}
+body {margin:0;padding:0;color: #444;font-family:"微软雅黑", Arial, Helvetica, sans-serif;background:#fff;text-align:left;position:relative; line-height:0.35rem;font-size:0.25rem;}
+img {border: 0;position:relative; max-width:100%;}
+.clear {height:0;line-height:0;font-size:0;clear:both;visibility:hidden;overflow:hidden;padding:0;margin:0;}
+div,ul,dl,dd,dt,li,td,th,tr,table,p,span,h1,h2,h3,h4,h5,h6,form{ margin:0;padding:0;list-style:none;list-style-type:none;word-wrap:break-word;position:relative;border:none; font-weight:400;}
+a {color:#333;text-decoration:none;position:relative;cursor:pointer;}
+header, footer, nav, section, article, menu, aside {display:block;position:relative;} 
+textarea { resize:none;font-family:"微软雅黑";font-size:0.25rem;}
+table { border-collapse:collapse;border-spacing:0;}
+th, td { text-align:left;}
+input {font-family:"微软雅黑";font-size:0.25rem;}
+input:focus {outline:none;}
+input.sub {cursor:pointer; background:none; border:none;-webkit-appearance:none;}
+input.text {background:none; border:none;}
+a,button,input{
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent; /* For some Androids */}
+
+
+/* conmmon style */
+.footer{
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+//  padding: 0 5%;
+    background: white;
+    border-top: #dddddd 1px solid;
+}
+.footer nav{
+    overflow: hidden;
+    width: 100%;
+}
+.footer nav a{
+    float: left;
+    width: 20%;
+    height: 0.98rem;
+    text-align: center;
+}
+.footer nav a span{
+    display: block;
+    margin: auto;
+    margin-top: 0.13rem;
+    width: 0.42rem;
+    height: 0.42rem;
+    text-align: center;
+}
+.footer nav a span img:nth-of-type(1){
+    display: none;
+}
+.footer nav a span img.active_img{
+    display: block;
+}
+.footer nav a span img.disable_img{
+    display: none;
+}
+.footer nav a label{
+    font-size: 0.2rem;
+    color: #5d5f6a;
+    line-height: 0.4rem;
+}
+.footer nav a label.active_label{
+    color: #e64b49;
+}
+.footer_size{
+    width: 100%;
+    height: 1rem;
+    float: left;
+}
+/* top_header */
+.top_heater{
+    margin: auto;
+    width: 100%;
+    height: 0.88rem;
+    background: white;
+    border-bottom: $border-color 1px solid;
+    span{
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 0.88rem;
+        font-size: 0.36rem;
+        color: #333333;
+    }
+    //清空
+    .clear_all{
+        position: absolute;
+        top: 0px;
+        width: 0.88rem;
+        height: 0.88rem;
+        right: 0px;
+        text-align: center;
+        line-height: 0.88rem;
+        color: $red;
+    }
+}
+.header_back{
+    position: absolute;
+    top: 0px;
+    width: 0.88rem;
+    height: 0.88rem;
+    display: block; 
+    left: 0px;
+    background: url(../images/top_header_back.png) no-repeat center;
+    background-size: 0.17rem 0.29rem;
+}
+.header_search{
+    position: absolute;
+    top: 0px;
+    width: 0.88rem;
+    height: 0.88rem;
+    display: block; 
+    right: 0px;
+    background: url(../images/top_header_search.png) no-repeat center;
+    background-size: 0.3rem 0.3rem;
+}
+.header_car{
+    position: absolute;
+    top: 0px;
+    width: 0.88rem;
+    height: 0.88rem;
+    display: block; 
+    right: 0px;
+    background: url(../images/header_car.png) no-repeat center;
+    background-size: 0.42rem 0.42rem;
+}
+//onload bd
+.onload_body{
+    width: 100%;
+    height: 100%;
+    background: url(../images/onload_bd.png) no-repeat center;
+    background-size: 100% 100%;
+}
+.gray_body{
+    height: 100%;
+    background: #fafafa;
+}
+/* 立刻购买 */
+.buy_now{
+    z-index: 99;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 0.94rem;
+    text-align: center;
+    a{
+        float: left;
+        width: 33.3%;
+        height: 100%;
+        line-height: 0.94rem;
+    }
+    .one{
+        background: #fafafa;
+        div{
+            position: relative;
+            float: left;
+            width: 50%;
+            height: 100%;
+            text-align: center;
+            span{
+                margin: auto;
+                margin-top: 0.14rem;
+//              overflow: hidden;
+                display: block;
+                width: 0.36rem;
+                height: 0.36rem;
+            }
+        }
+        img{
+            display: block;
+            width: 0.36rem;
+            height: 0.36rem;
+        }
+        label{
+            line-height: 0.3rem;
+            height: 0.3rem;
+            width: 100%;
+            position: absolute;
+            left: 0px;
+            bottom: 0.06rem;
+            color: #888888;
+        }
+    }
+    .two{
+        font-size: 0.32rem;
+        color: white;
+    }
+    .buy{
+        background: #ffaa00;
+    }
+    .car{
+        background: $red;
+    }
+    .yes{
+        z-index: 99;
+        position: absolute;
+        border-bottom: 0rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -70,7 +70,7 @@
 <div class="pay_now">
 	<span class="all_choice" onclick="base.cart.allSelect();"><label><font id="all"></font></label>全选</span>
 	<span class="all_math">合计：￥<font id="totalPrice">0</font></span>
-	<a href="#" title="">去结算(<font id="selectedNumber">0</font>)</a>
+	<a href="javascript:base.cart.pay();" title="<#if setting??>${setting.title!''}-</#if>去结算">去结算(<font id="selectedNumber">0</font>)</a>
 </div>
 <!-- pay end -->
 <!-- footer -->

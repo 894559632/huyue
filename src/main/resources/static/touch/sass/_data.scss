@@ -1,0 +1,52 @@
+@charset "UTF-8";
+// mixin 
+$red:#e64b49;
+//border line
+$bc:#eeeeee;
+// 定义决定定位
+@mixin pos($left:0px,$top:0px){
+    position: absolute;
+    left: $left;
+    top: $top;
+}
+//   占位符
+%pos0{
+    position: absolute;
+    left: 0px;
+    top:0px;
+}
+%re{
+    position: relative;
+}
+// shadow
+%shadow{
+    box-shadow:0 0 3px 0px #666666;
+}
+// #
+$properties: (-webkit-, -moz-,-o-,-ms-);
+@mixin css3($side, $value) {
+    @each $prop in $properties {
+        #{$prop}#{$side}: $value;
+    }
+}
+
+.test{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    width: 90%;
+    padding: 0 6%;
+    height: 90px;
+    }
+.dele{
+    position: absolute;
+    right:-80px;
+    top: 0px;
+    width: 80px;
+    height: 90px;
+    background: #e64b49;
+    font-size: 1.3em;
+    line-height: 90px;
+    text-align: center;
+    color: white;
+}

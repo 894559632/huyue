@@ -133,3 +133,30 @@ base.cart.isAllSelected = function() {
 		base.getE("all").className = "";
 	}
 }
+
+base.cart.pay = function() {
+	var number = base.getE("selectedNumber").innerHTML;
+	if (0 === Number(number)) {
+		alert("请选择结算商品");
+		return;
+	}
+
+	$.ajax({
+		url : "/touch/cart/pay",
+		method : "post",
+		traditional : true,
+		data : {
+			data : base.cart.selected
+		},
+		success : function(res) {
+			if (0 !== res.status) {
+				alert(res.message);
+				if (-2 === res.status) {
+					window.location.href = "/touch/login";
+				}
+			} else {
+				window.location.href = "/touch/pay?orderId="+res.id;
+			}
+		}
+	});
+}

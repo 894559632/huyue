@@ -32,4 +32,20 @@ public interface TdUserVisitedRepo
 	 */
 	void deleteByUsername(String username);
 
+	/**
+	 * 查找指定用户，指定商品id的浏览记录
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 创建时间：2016年5月5日上午10:01:52
+	 */
+	TdUserVisited findByUsernameAndGoodsId(String username, Long goodsId);
+
+	/**
+	 * 查找指定用户，指定商品id的浏览记录
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 创建时间：2016年5月5日上午10:01:52
+	 */
+	TdUserVisited findByUserIdAndGoodsId(Long userId, Long goodsId);
+
 }

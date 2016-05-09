@@ -28,7 +28,7 @@
 <!-- header_top -->
 <section class="container collect_header">
 	<div class="top_heater">
-		<a href="/touch" title="<#if setting??>${setting.title!''}-</#if>返回" class="header_back"></a>
+		<a href="/touch/user" title="<#if setting??>${setting.title!''}-</#if>返回" class="header_back"></a>
 		<span>我的收藏</span>
 	</div>
 </section>

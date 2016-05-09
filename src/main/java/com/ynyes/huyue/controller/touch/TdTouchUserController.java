@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.huyue.entity.TdCity;
 import com.ynyes.huyue.entity.TdSetting;
 import com.ynyes.huyue.entity.TdShippingAddress;
 import com.ynyes.huyue.entity.TdUser;
 import com.ynyes.huyue.entity.TdUserCollect;
 import com.ynyes.huyue.entity.TdUserVisited;
+import com.ynyes.huyue.service.TdCityService;
 import com.ynyes.huyue.service.TdSettingService;
 import com.ynyes.huyue.service.TdShippingAddressService;
 import com.ynyes.huyue.service.TdUserCollectService;
@@ -51,6 +53,9 @@ public class TdTouchUserController {
 
 	@Autowired
 	private TdUserVisitedService tdUserVisitedService;
+
+	@Autowired
+	private TdCityService tdCityService;
 
 	@RequestMapping
 	public String touchUser(HttpServletRequest req, ModelMap map) {
@@ -190,6 +195,63 @@ public class TdTouchUserController {
 
 		tdUserVisitedService.deleteByUsername(username);
 
+		res.put("status", 0);
+		return res;
+	}
+
+	@RequestMapping(value = "/add/address")
+	public String touchUserAddAddress(HttpServletRequest req, ModelMap map) {
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			return "redirect:/touch/login";
+		}
+
+		// 获取所有的城市信息
+		List<TdCity> city_list = tdCityService.findAll();
+		map.addAttribute("city_list", city_list);
+
+		return "/touch/user_add_address";
+	}
+
+	@RequestMapping(value = "/address/save")
+	@ResponseBody
+	public Map<String, Object> touchUserAddressSave(HttpServletRequest req, ModelMap map, String name, String phone,
+			Long cityId, String detail) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			res.put("message", "请先登录");
+			res.put("status", -2);
+			return res;
+		}
+
+		TdUser user = tdUserService.findByUsername(username);
+		TdCity city = tdCityService.findOne(cityId);
+
+		List<TdShippingAddress> address_list = tdShippingAddressService.findByUserId(user.getId());
+
+		if (null != address_list && address_list.size() == 5) {
+			res.put("message", "您已经拥有5个收货地址，不能够在添加了");
+			return res;
+		}
+
+		if (null != user && null != city) {
+			TdShippingAddress address = new TdShippingAddress();
+			address.setCityId(city.getId());
+			address.setCityTitle(city.getTitle());
+			address.setDetail(detail);
+			address.setReceiveName(name);
+			address.setReceivePhone(phone);
+			address.setUserId(user.getId());
+			address.setUsername(username);
+
+			if (null == address_list || address_list.size() == 0) {
+				address.setIsDefault(true);
+			}
+			tdShippingAddressService.save(address);
+		}
 		res.put("status", 0);
 		return res;
 	}

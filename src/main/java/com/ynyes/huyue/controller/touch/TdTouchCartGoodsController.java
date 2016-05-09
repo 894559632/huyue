@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.huyue.entity.TdCartGoods;
 import com.ynyes.huyue.entity.TdSetting;
+import com.ynyes.huyue.entity.TdUser;
 import com.ynyes.huyue.service.TdCartGoodsService;
+import com.ynyes.huyue.service.TdCommonService;
 import com.ynyes.huyue.service.TdSettingService;
+import com.ynyes.huyue.service.TdUserService;
 
 /**
  * 购物车相关的控制器
@@ -26,13 +29,19 @@ import com.ynyes.huyue.service.TdSettingService;
 
 @Controller
 @RequestMapping(value = "/touch/cart")
-public class TdCartGoodsController {
+public class TdTouchCartGoodsController {
 
 	@Autowired
 	private TdCartGoodsService tdCartGoodsService;
 
 	@Autowired
 	private TdSettingService tdSettingService;
+
+	@Autowired
+	private TdUserService tdUserService;
+
+	@Autowired
+	private TdCommonService tdCommonService;
 
 	@RequestMapping
 	public String touchCart(HttpServletRequest req, ModelMap map) {
@@ -67,7 +76,7 @@ public class TdCartGoodsController {
 			return res;
 		}
 
-		TdCartGoods cartGoods = tdCartGoodsService.findByGoodsIdAndUsername(id, username);
+		TdCartGoods cartGoods = tdCartGoodsService.findOne(id);
 		if (null != cartGoods) {
 			if (0L == operate.longValue()) {
 				cartGoods.setQuantity(cartGoods.getQuantity() - 1L);
@@ -77,9 +86,35 @@ public class TdCartGoodsController {
 			}
 			cartGoods.setTotal(cartGoods.getQuantity() * cartGoods.getPrice());
 		}
-		
+
 		tdCartGoodsService.save(cartGoods);
 
+		res.put("status", 0);
+		return res;
+	}
+
+	@RequestMapping(value = "/pay")
+	@ResponseBody
+	public Map<String, Object> touchCartPay(HttpServletRequest req, ModelMap map, Long[] data) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+
+		if (null == data || data.length <= 0) {
+			res.put("message", "未能成功获取到购物车信息");
+			return res;
+		}
+
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			res.put("status", -2);
+			res.put("message", "请先登录");
+			return res;
+		}
+		TdUser user = tdUserService.findByUsername(username);
+
+		Long orderId = tdCommonService.createOrder(data, user);
+
+		res.put("id", orderId);
 		res.put("status", 0);
 		return res;
 	}

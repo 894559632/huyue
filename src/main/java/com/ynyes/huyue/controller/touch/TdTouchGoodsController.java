@@ -125,6 +125,9 @@ public class TdTouchGoodsController {
 
 		map.addAttribute("goodsId", id);
 
+		// 添加浏览记录的方法
+		tdCommonService.addVisit(req, goods);
+
 		// 获取网站设置信息
 		TdSetting setting = tdSettingService.findTopBy();
 		map.addAttribute("setting", setting);

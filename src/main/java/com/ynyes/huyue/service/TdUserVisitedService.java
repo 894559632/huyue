@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ynyes.huyue.entity.TdUserVisited;
@@ -20,6 +21,7 @@ import com.ynyes.huyue.repository.TdUserVisitedRepo;
 @Transactional
 public class TdUserVisitedService {
 
+	@Autowired
 	private TdUserVisitedRepo repository;
 
 	public TdUserVisited save(TdUserVisited e) {
@@ -69,6 +71,32 @@ public class TdUserVisitedService {
 		if (null != username) {
 			repository.deleteByUsername(username);
 		}
+	}
+
+	/**
+	 * 查找指定用户，指定商品id的浏览记录
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 创建时间：2016年5月5日上午10:01:52
+	 */
+	public TdUserVisited findByUsernameAndGoodsId(String username, Long goodsId) {
+		if (null == username || null == goodsId) {
+			return null;
+		}
+		return repository.findByUsernameAndGoodsId(username, goodsId);
+	}
+	
+	/**
+	 * 查找指定用户，指定商品id的浏览记录
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 创建时间：2016年5月5日上午10:01:52
+	 */
+	public TdUserVisited findByUserIdAndGoodsId(Long userId, Long goodsId) {
+		if (null == userId || null == goodsId) {
+			return null;
+		}
+		return repository.findByUserIdAndGoodsId(userId, goodsId);
 	}
 
 }

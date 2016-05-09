@@ -56,6 +56,6 @@
 
 <!-- address_add_box end -->
 <div style="width: 100%;height: 1rem;float: left;"></div>
-<a class="footer_btn address_btn" href="#" title="">新增收货地址</a>
+<a class="footer_btn address_btn" href="/touch/user/add/address" title="<#if setting??>${setting.title!''}-</#if>新增收货地址">新增收货地址</a>
 </body>
 </html>
