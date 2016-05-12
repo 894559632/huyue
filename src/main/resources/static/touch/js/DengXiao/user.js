@@ -59,15 +59,66 @@ base.user.city.save = function() {
 			detail : detail
 		},
 		success : function(res) {
-			if(0 !== res.status){
+			if (0 !== res.status) {
 				alert(res.message);
-				if(-2 === res.status){
+				if (-2 === res.status) {
 					window.location.herf = "/touch/login";
 				}
-			}else{
+			} else {
 				window.location.href = "/touch/user/address";
 			}
 		}
 	});
+}
 
+// 与用户注册相关的命名空间
+base.user.regist = {};
+
+// 重新获取验证码的时间
+base.user.regist.smsTime = 60;
+
+// 获取短信验证码倒计时的方法
+base.user.regist.reSmsTime = function() {
+	if (0 !== base.user.regist.reSmsTime) {
+		setTimeout(function() {
+			base.user.regist.smsTime -= 1;
+			base.getE("getSms").innerHTML = "等待（" + base.user.regist.smsTime
+					+ ")";
+			console.log(0 === base.user.regist.smsTime);
+			if (0 === base.user.regist.smsTime) {
+				base.getE("getSms").innerHTML = "获取验证码";
+				base.user.regist.smsTime = 60;
+			} else {
+				base.user.regist.reSmsTime();
+			}
+		}, 1000);
+	}
+}
+
+// 用户注册获取短信验证码的方法
+base.user.regist.getSms = function() {
+	if (60 === base.user.regist.smsTime) {
+		var imgSms = base.getE("imgSms").value;
+		if (!imgSms) {
+			alert("请输入正确的图形验证码");
+			return res;
+		}
+
+		console.log(imgSms);
+
+		$.ajax({
+			url : "/code/check",
+			type : "post",
+			data : {
+				data : imgSms
+			},
+			success : function(res) {
+				if (0 !== res.status) {
+					alert("请输入正确的图形验证码");
+				} else {
+					base.user.regist.reSmsTime();
+				}
+			}
+		})
+	}
 }

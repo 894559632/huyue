@@ -43,7 +43,7 @@
 		<a class="zhi" href="#" title=""></a>
 	</div>
 	<label class="ifaccount">还没有账号</label>
-	<a class="register" href="" title="">注册</a>
+	<a class="register" href="/touch/regist" title="<#if setting??>${setting.title!''}-</#if>注册">注册</a>
 </form>
 <!-- onload end -->
 </body>
