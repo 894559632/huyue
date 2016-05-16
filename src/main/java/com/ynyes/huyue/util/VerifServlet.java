@@ -70,7 +70,6 @@ public class VerifServlet {
         for(int i=1;i<=stringNum;i++){
             randomString=drowString(g,randomString,i);
         }
-        System.out.println(randomString+"..");
         session.removeAttribute(RANDOMCODEKEY);
         session.setAttribute(RANDOMCODEKEY, randomString);
         g.dispose();

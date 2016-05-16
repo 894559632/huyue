@@ -1,5 +1,10 @@
 package com.ynyes.huyue.controller.touch;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,21 +17,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ynyes.huyue.entity.TdCity;
+import com.ynyes.huyue.entity.TdOrder;
 import com.ynyes.huyue.entity.TdSetting;
 import com.ynyes.huyue.entity.TdShippingAddress;
 import com.ynyes.huyue.entity.TdUser;
+import com.ynyes.huyue.entity.TdUserAdvice;
 import com.ynyes.huyue.entity.TdUserCollect;
 import com.ynyes.huyue.entity.TdUserVisited;
 import com.ynyes.huyue.service.TdCityService;
+import com.ynyes.huyue.service.TdOrderService;
 import com.ynyes.huyue.service.TdSettingService;
 import com.ynyes.huyue.service.TdShippingAddressService;
+import com.ynyes.huyue.service.TdUserAdviceService;
 import com.ynyes.huyue.service.TdUserCollectService;
 import com.ynyes.huyue.service.TdUserService;
 import com.ynyes.huyue.service.TdUserVisitedService;
 import com.ynyes.huyue.util.ClientConstant;
+import com.ynyes.huyue.util.SiteMagConstant;
 
 /**
  * 触屏版个人中心相关的控制器
@@ -57,6 +69,12 @@ public class TdTouchUserController {
 	@Autowired
 	private TdCityService tdCityService;
 
+	@Autowired
+	private TdOrderService tdOrderService;
+	
+	@Autowired
+	private TdUserAdviceService tdUserAdviceService;
+
 	@RequestMapping
 	public String touchUser(HttpServletRequest req, ModelMap map) {
 		String username = (String) req.getSession().getAttribute("username");
@@ -66,6 +84,18 @@ public class TdTouchUserController {
 
 		TdUser user = tdUserService.findByUsername(username);
 		map.addAttribute("user", user);
+
+		// 获取用户待付款的订单数量
+		Long unpay_number = tdOrderService.findCountByUsernameAndStatusId(username, 2L);
+		map.addAttribute("unpay_number", unpay_number);
+
+		// 获取用户待收货订单的数量
+		Long unsign_number = tdOrderService.findCountByUsernameAndStatusId(username, 4L);
+		map.addAttribute("unsign_number", unsign_number);
+
+		// 获取用户带评价订单的数量
+		Long uncomment_number = tdOrderService.findCountByUsernameAndStatusId(username, 5L);
+		map.addAttribute("uncomment_number", uncomment_number);
 
 		// 获取网站设置信息
 		TdSetting setting = tdSettingService.findTopBy();
@@ -82,7 +112,34 @@ public class TdTouchUserController {
 
 		TdUser user = tdUserService.findByUsername(username);
 		map.addAttribute("user", user);
+
+		// 获取所有的城市
+		List<TdCity> city_list = tdCityService.findAll();
+		map.addAttribute("city_list", city_list);
+
+		// 获取网站设置信息
+		TdSetting setting = tdSettingService.findTopBy();
+		map.addAttribute("setting", setting);
+
 		return "/touch/user_info";
+	}
+
+	@RequestMapping(value = "/info/save", method = RequestMethod.POST)
+	public String touchUserInfoSave(HttpServletRequest req, ModelMap map, String sex, Long cityId) {
+		String username = (String) req.getSession().getAttribute("username");
+		TdUser user = tdUserService.findByUsername(username);
+		if (null == user) {
+			return "redirect:/touch/login";
+		}
+		user.setSex(sex);
+		TdCity city = tdCityService.findOne(cityId);
+		if (null != city) {
+			user.setCity(city.getTitle());
+			user.setCityId(city.getId());
+		}
+		tdUserService.save(user);
+
+		return "redirect:/touch/user";
 	}
 
 	@RequestMapping(value = "/collect")
@@ -148,6 +205,36 @@ public class TdTouchUserController {
 		return "/touch/user_collect";
 	}
 
+	/**
+	 * 删除指定用户指定收藏的方法
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 版本：2016年5月13日上午11:14:28
+	 */
+	@RequestMapping(value = "/collect/delete")
+	@ResponseBody
+	public Map<String, Object> touchUserCollectDelete(HttpServletRequest req, ModelMap map, Long id) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+
+		if (null == id) {
+			res.put("message", "未获取到收藏商品的信息");
+			return res;
+		}
+
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			res.put("status", -2);
+			res.put("message", "请先登陆");
+			return res;
+		}
+
+		tdUserCollectService.delete(id);
+
+		res.put("status", 0);
+		return res;
+	}
+
 	@RequestMapping(value = "/address")
 	public String touchUserAddress(HttpServletRequest req, ModelMap map) {
 		String username = (String) req.getSession().getAttribute("username");
@@ -181,6 +268,12 @@ public class TdTouchUserController {
 		return "/touch/user_visited";
 	}
 
+	/**
+	 * 触屏版个人中心清空我的历史纪录
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 创建时间：2016年4月25日下午9:40:22
+	 */
 	@RequestMapping(value = "/visited/clear", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> touchUserVisitedClear(HttpServletRequest req, ModelMap map) {
@@ -189,7 +282,8 @@ public class TdTouchUserController {
 
 		String username = (String) req.getSession().getAttribute("username");
 		if (null == username) {
-			res.put("message", "未获取到登录用户的信息");
+			res.put("status", -2);
+			res.put("message", "请先登陆");
 			return res;
 		}
 
@@ -200,23 +294,31 @@ public class TdTouchUserController {
 	}
 
 	@RequestMapping(value = "/add/address")
-	public String touchUserAddAddress(HttpServletRequest req, ModelMap map) {
+	public String touchUserAddAddress(HttpServletRequest req, ModelMap map, Long id) {
 		String username = (String) req.getSession().getAttribute("username");
 		if (null == username) {
 			return "redirect:/touch/login";
+		}
+
+		if (null != id) {
+			TdShippingAddress address = tdShippingAddressService.findOne(id);
+			map.addAttribute("address", address);
 		}
 
 		// 获取所有的城市信息
 		List<TdCity> city_list = tdCityService.findAll();
 		map.addAttribute("city_list", city_list);
 
+		// 获取网站设置信息
+		TdSetting setting = tdSettingService.findTopBy();
+		map.addAttribute("setting", setting);
 		return "/touch/user_add_address";
 	}
 
 	@RequestMapping(value = "/address/save")
 	@ResponseBody
 	public Map<String, Object> touchUserAddressSave(HttpServletRequest req, ModelMap map, String name, String phone,
-			Long cityId, String detail) {
+			Long cityId, String detail, Long id) {
 		Map<String, Object> res = new HashMap<>();
 		res.put("status", -1);
 
@@ -226,32 +328,215 @@ public class TdTouchUserController {
 			res.put("status", -2);
 			return res;
 		}
-
-		TdUser user = tdUserService.findByUsername(username);
 		TdCity city = tdCityService.findOne(cityId);
 
-		List<TdShippingAddress> address_list = tdShippingAddressService.findByUserId(user.getId());
+		if (null == id || 0L == id.longValue()) {
+			TdUser user = tdUserService.findByUsername(username);
 
-		if (null != address_list && address_list.size() == 5) {
-			res.put("message", "您已经拥有5个收货地址，不能够在添加了");
+			List<TdShippingAddress> address_list = tdShippingAddressService.findByUserId(user.getId());
+
+			if (null != address_list && address_list.size() == 5) {
+				res.put("message", "您已经拥有5个收货地址，不能够在添加了");
+				return res;
+			}
+
+			if (null != user && null != city) {
+				TdShippingAddress address = new TdShippingAddress();
+				address.setCityId(city.getId());
+				address.setCityTitle(city.getTitle());
+				address.setDetail(detail);
+				address.setReceiveName(name);
+				address.setReceivePhone(phone);
+				address.setUserId(user.getId());
+				address.setUsername(username);
+
+				if (null == address_list || address_list.size() == 0) {
+					address.setIsDefault(true);
+				}
+				tdShippingAddressService.save(address);
+			}
+		} else {
+			TdShippingAddress address = tdShippingAddressService.findOne(id);
+			if (null != address) {
+				address.setCityId(city.getId());
+				address.setCityTitle(city.getTitle());
+				address.setDetail(detail);
+				address.setReceiveName(name);
+				address.setReceivePhone(phone);
+				tdShippingAddressService.save(address);
+			}
+		}
+		res.put("status", 0);
+		return res;
+	}
+
+	@RequestMapping(value = "/address/default")
+	@ResponseBody
+	public Map<String, Object> touchUserAddressDefault(HttpServletRequest req, ModelMap map, Long id) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+
+		if (null == id) {
+			res.put("message", "未获取到指定收货地址的信息");
 			return res;
 		}
 
-		if (null != user && null != city) {
-			TdShippingAddress address = new TdShippingAddress();
-			address.setCityId(city.getId());
-			address.setCityTitle(city.getTitle());
-			address.setDetail(detail);
-			address.setReceiveName(name);
-			address.setReceivePhone(phone);
-			address.setUserId(user.getId());
-			address.setUsername(username);
-
-			if (null == address_list || address_list.size() == 0) {
-				address.setIsDefault(true);
-			}
-			tdShippingAddressService.save(address);
+		String username = (String) req.getSession().getAttribute("username");
+		TdUser user = tdUserService.findByUsername(username);
+		if (null == user) {
+			res.put("status", -2);
+			res.put("message", "请先登陆");
+			return res;
 		}
+
+		// 获取用户所有的收货地址
+		TdShippingAddress address = tdShippingAddressService.findByUsernameAndIsDefaultTrue(username);
+		address.setIsDefault(false);
+		tdShippingAddressService.save(address);
+
+		// 设置新的默认地址
+		TdShippingAddress shippingAddress = tdShippingAddressService.findOne(id);
+		shippingAddress.setIsDefault(true);
+		tdShippingAddressService.save(shippingAddress);
+
+		res.put("status", 0);
+		return res;
+	}
+
+	@RequestMapping(value = "/address/remove")
+	@ResponseBody
+	public Map<String, Object> touchUserAddressRemove(HttpServletRequest req, ModelMap map, Long id) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+
+		if (null == id) {
+			res.put("message", "未获取到指定的收获地址信息");
+			return res;
+		}
+
+		tdShippingAddressService.delete(id);
+
+		res.put("status", 0);
+		return res;
+	}
+
+	@RequestMapping(value = "/center/headImage", method = RequestMethod.POST)
+	public String uploadImg(@RequestParam MultipartFile Filedata, String username, HttpServletRequest req,
+			ModelMap map) {
+		if (null == username) {
+			username = (String) req.getSession().getAttribute("username");
+			if (null == username) {
+				return "redirect:/touch/login";
+			}
+		}
+
+		TdUser user = tdUserService.findByUsername(username);
+		if (null == user) {
+			return "redirect:/touch/login";
+		}
+
+		String name = Filedata.getOriginalFilename();
+
+		String ext = name.substring(name.lastIndexOf("."));
+
+		try {
+			byte[] bytes = Filedata.getBytes();
+
+			Date dt = new Date(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+			String fileName = sdf.format(dt) + ext;
+
+			String uri = SiteMagConstant.imagePath + "/" + fileName;
+
+			File file = new File(uri);
+
+			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
+			stream.write(bytes);
+			stream.close();
+			user.setHeadImgUri("/images/" + fileName);
+			tdUserService.save(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/touch/user";
+	}
+
+	@RequestMapping(value = "/order/list")
+	public String touchUserOrderList(HttpServletRequest req, ModelMap map, Long type) {
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			return "redirect:/touch/login";
+		}
+
+		if (0L == type.longValue()) {
+			Page<TdOrder> order_page = tdOrderService.findByUsernameOrderByOrderTimeDesc(username, 0, 10);
+			map.addAttribute("order_page", order_page);
+		} else {
+			Page<TdOrder> order_page = tdOrderService.findByUsernameAndStatusIdOrderByOrderTimeDesc(username, type, 0,
+					10);
+			map.addAttribute("order_page", order_page);
+		}
+
+		map.addAttribute("type", type);
+		// 获取网站设置信息
+		TdSetting setting = tdSettingService.findTopBy();
+		map.addAttribute("setting", setting);
+		return "/touch/user_order";
+	}
+
+	/**
+	 * 瀑布楼获取订单数据的方法
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 版本：20162016年5月16日下午4:42:38
+	 */
+	@RequestMapping(value = "/order/get")
+	public String touchUserOrderGet(HttpServletRequest req, ModelMap map, Long type, Integer page) {
+		String username = (String) req.getSession().getAttribute("username");
+		if (0L == type.longValue()) {
+			Page<TdOrder> order_page = tdOrderService.findByUsernameOrderByOrderTimeDesc(username, (page + 1), 10);
+			map.addAttribute("order_page", order_page);
+		} else {
+			Page<TdOrder> order_page = tdOrderService.findByUsernameAndStatusIdOrderByOrderTimeDesc(username, type,
+					(page + 1), 10);
+			map.addAttribute("order_page", order_page);
+		}
+		return "/touch/user_order_info";
+	}
+
+	/**
+	 * 跳转到意见反馈的方法
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 版本：20162016年5月16日下午4:43:47
+	 */
+	@RequestMapping(value = "/advice")
+	public String touchUserAdvice(HttpServletRequest req, ModelMap map) {
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			return "redirect:/touch/login";
+		}
+
+		map.addAttribute("username", username);
+		// 获取网站设置信息
+		TdSetting setting = tdSettingService.findTopBy();
+		map.addAttribute("setting", setting);
+		return "/touch/user_advice";
+	}
+
+	@RequestMapping(value = "/advice/save")
+	@ResponseBody
+	public Map<String, Object> touchUserAdviceSave(HttpServletRequest req, ModelMap map, String content, String phone) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+
+		TdUserAdvice advice = new TdUserAdvice();
+		advice.setAdviceTime(new Date());
+		advice.setContent(content);
+		advice.setPhone(phone);
+		advice.setIsReply(false);
+		tdUserAdviceService.save(advice);
+
 		res.put("status", 0);
 		return res;
 	}

@@ -17,6 +17,8 @@
 <!-- js -->
 <script type="text/javascript" src="/touch/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/touch/js/common.js"></script>
+<script type="text/javascript" src="/touch/js/DengXiao/base.js"></script>
+<script type="text/javascript" src="/touch/js/DengXiao/user.js"></script>
 </head>
 <script type="text/javascript">
 	$(function(){
@@ -45,7 +47,7 @@
 	<#if user_collect_page??&&user_collect_page.content?size gt 0>
 		<#list user_collect_page.content as item>
 			<#if item??>
-				<li class="history_box">
+				<li class="history_box" id="container${item.id?c}">
 					<div class="test">
 						<div class="box">
 							<img class="history" alt="<#if setting??>${setting.title!''}-</#if>${item.goodsTitle!''}" src="${item.goodsCoverImageUri!''}"/>
@@ -54,7 +56,7 @@
 								<span>￥<#if item.price??>${item.price?string("0.00")}<#else>0.00</#if></span>
 							</div>
 						</div>
-						<div class="dele"></div>
+						<div class="dele" onclick="base.user.collect.deleteCollect(${item.id?c});"></div>
 					</div>
 				</li>
 			</#if>

@@ -31,6 +31,7 @@
 <!-- header_top end -->
 <!-- personage  -->
 <ul class="personage">
+	<input type="hidden" value="<#if address??>${address.id?c}<#else>0</#if>" id="addressId">
 	<li class="li02">
 		<a href="javascript:void(0);" title="<#if setting??>${setting.title!''}-</#if>收货人姓名">
 			<label>收货人姓名：</label>
@@ -38,9 +39,9 @@
 		</a>
 	</li>
 	<li class="li02">
-		<a href="javascript:void(0);" title="<#if setting??>${setting.title!''}-</#if>电话" <#if address??>value="${address.receivePhone!''}"</#if>>
+		<a href="javascript:void(0);" title="<#if setting??>${setting.title!''}-</#if>电话">
 			<label>电话：</label>
-			<input type="text" name="receive_phone" id="receive_phone" placeholder="请输入收货人电话" />
+			<input type="text" name="receive_phone" id="receive_phone" placeholder="请输入收货人电话" <#if address??>value="${address.receivePhone!''}"</#if> />
 		</a>
 	</li>
 	<li class="li03">
@@ -51,7 +52,7 @@
 				<#if city_list??>
 					<#list city_list as item>
 						<#if item??>
-							<option value="${item.id?c}">${item.title!''}</option>
+							<option <#if address??&&address.cityId??&&item.id?c==address.cityId?c>selected="selected"</#if> value="${item.id?c}">${item.title!''}</option>
 						</#if>
 					</#list>
 				</#if>
@@ -61,7 +62,7 @@
 	<li class="li02">
 		<a href="javascript:void(0);" title="<#if setting??>${setting.title!''}-</#if>详细地址">
 			<label>详细地址：</label>
-			<input type="text" name="receive_detail" id="receive_detail" placeholder="请输入收货人详细地址" <#if address??>value="${address.receiveDetail!''}"</#if>/>
+			<input type="text" name="receive_detail" id="receive_detail" placeholder="请输入收货人详细地址" <#if address??>value="${address.detail!''}"</#if>/>
 		</a>
 	</li>
 </ul>

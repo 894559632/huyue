@@ -17,6 +17,8 @@
 <!-- js -->
 <script type="text/javascript" src="/touch/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/touch/js/common.js"></script>
+<script type="text/javascript" src="/touch/js/DengXiao/base.js"></script>
+<script type="text/javascript" src="/touch/js/DengXiao/user.js"></script>
 </head>
 <script type="text/javascript">
 	$(function(){
@@ -36,18 +38,18 @@
 <#if address_list ??>
 	<#list address_list as item>
 		<#if item??>
-			<div class="sure_order_title address_add_box">
+			<div class="sure_order_title address_add_box" id="box${item.id?c}">
 				<div class="name">
 					<p>
 						<span>${item.receiveName!''}</span>
 						<span>${item.receivePhone!''}</span>
 					</p>
 				</div>
-				<a class="address_add" href="#" title="">${item.detail!''}</a>
+				<a class="address_add" href="/touch/user/add/address?id=${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>修改收货地址">${item.cityTitle!''}${item.detail!''}</a>
 				<section>
-					<span class="default <#if item.isDefault??&&item.isDefault>span_active</#if>">默认地址</span>
-					<span class="delete">删除</span>
-					<span class="fixed">修改 </span>
+					<span onclick="base.user.address.setDefault(${item.id?c});" class="default <#if item.isDefault??&&item.isDefault>span_active</#if>">默认地址</span>
+					<span onclick="base.user.address.remove(${item.id?c});" class="delete">删除</span>
+					<span onclick="base.user.address.edit(${item.id?c});" class="fixed">修改 </span>
 				</section>
 			</div>
 		</#if>

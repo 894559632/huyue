@@ -77,23 +77,35 @@
 <!-- header_top end -->
 <!-- onload  -->
 <form class="onload_box">
-    <input class="text" type="text" placeholder="手机号" name="" id="" value=""/>
-
+	<select class="regist_city" id="cityId">
+		<option value="0">请选择</option>
+		<#if city_list??&&city_list?size gt 0>
+			<#list city_list as item>
+				<#if item??>
+					<option value="${item.id?c}">${item.title!''}</option>
+				</#if>
+			</#list>
+		</#if>
+	</select>
+    <input class="text" type="text" placeholder="手机号" name="phone" id="phone" value=""/>
+    <input class="text" type="password" placeholder="密码" name="password" id="password" value=""/>
+    <input class="text" type="password" placeholder="确认密码" name="repassword" id="repassword" value=""/>
+    <input class="text" type="text" placeholder="真实姓名" name="realName" id="realName" value=""/>
     <div class="mark_test">
-        <input class="text" type="text" placeholder="手机验证码" name="" id="" value=""/>
-        <span class="mark_btn" id="getSms" onclick="base.user.regist.getSms();">获取验证码</span>
+        <input class="text" type="text" placeholder="图形验证码" name="imgSms" id="imgSms" value=""/>
+        <span class="mark_btn"><img class="sms_img" src="/code" height="40" onclick="this.src = '/code?date='+Math.random();"/></span>
     </div>
-    <input class="text" type="text" placeholder="密码" name="" id="" value=""/>
-    <input class="text" type="text" placeholder="真实姓名" name="" id="" value=""/>
     <div class="mark_test">
-        <input class="text" type="text" placeholder="图形验证码" name="" id="imgSms" value=""/>
-        <span class="mark_btn"><img src="/code" height="40" onclick="this.src = '/code?date='+Math.random();"/></span>
+        <input class="text" type="text" placeholder="手机验证码" name="smsCode" id="smsCode" value=""/>
+        <span class="mark_btn" id="getSms">获取验证码</span>
     </div>
-    <input class="sub" type="submit" name="" id="" value="注册"/>
+    <input class="sub" type="button" onclick="base.user.regist.submit();" value="注册"/>
 
     <p class="forget_secret"></p>
 
+	<#--
     <div class="have_account"></div>
+    -->
     <label class="ifaccount">已经拥有账号</label>
     <a class="register" href="/touch/login" title="<#if setting??>${setting.title!''}-</#if>登陆">登录</a>
 </form>
@@ -102,5 +114,8 @@
 <div class="dialog" id="dialog">
     <span class="tips">请输入正确手机号码！</span>
 </div>
+	<script>
+		base.user.regist.openSms();
+	</script>
 </body>
 </html>

@@ -94,7 +94,7 @@
 				<#if level_one??>
 					<#list level_one as item>
 						<#if item??>
-							<span <#if level_one_id??&&level_one_id?c==item.id?c>class="active_span"</#if>>${item.title!''}<label></label></span>
+							<span id="level_one_box${item.id?c}" <#if level_one_id??&&level_one_id?c==item.id?c>class="active_span"</#if>>${item.title!''}<label></label></span>
 						</#if>
 					</#list>					
 				</#if>
@@ -103,7 +103,7 @@
 				<#if level_one??>
 					<#list level_one as item>
 						<#if item??>
-							<div>
+							<div id="level_two_box${item.id?c}">
 								<#if ("level_two"+item_index)?eval??>
 									<#list ("level_two"+item_index)?eval as sub_item>
 										<#if sub_item??>
@@ -141,4 +141,11 @@
 </ul>
 <!-- good list end -->
 </body>
+	<#if level_one_id??>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#level_one_box${level_one_id?c}").click();
+			});
+		</script>
+	</#if>
 </html>

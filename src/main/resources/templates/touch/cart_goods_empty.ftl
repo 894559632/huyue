@@ -34,7 +34,7 @@
 <div class="buycar_empty">
 	<img alt="" src="/touch/images/buycar_empty.png"/>
 	<p>您的购物车暂无商品</p>
-	<a href="/touch" title="<#if setting??>${setting.title!''}-</#if>随便逛逛">随便逛逛~</a>
+	<a href="/touch/goods" title="<#if setting??>${setting.title!''}-</#if>随便逛逛">随便逛逛~</a>
 </div>
 <!-- buycar_empty end -->
 <!-- footer -->

@@ -1,17 +1,19 @@
-package com.ynyes.huyue.controller.touch;
+package com.ynyes.huyue.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sun.swing.internal.plaf.metal.resources.metal_zh_TW;
+import com.ynyes.huyue.util.SMSUtil;
 import com.ynyes.huyue.util.VerifServlet;
 
 @Controller
@@ -44,5 +46,24 @@ public class TdCodeController {
 
 		res.put("status", 0);
 		return res;
+	}
+
+	@RequestMapping(value = "/send")
+	@ResponseBody
+	public Map<String, Object> smsCode(String mobile, HttpServletResponse response, HttpServletRequest request) {
+		Random random = new Random();
+
+		String smscode = String.format("%04d", random.nextInt(9999));
+
+		HttpSession session = request.getSession();
+
+		session.setAttribute("SMSCODE", smscode);
+
+		HashMap<String, Object> map = SMSUtil.send(mobile, "85628", new String[] { smscode, "5" });
+		
+		map.put("status", "0");
+		map.put("code", smscode);
+		return map;
+
 	}
 }

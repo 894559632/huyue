@@ -211,7 +211,7 @@ $(function () {
         </dd>
     </dl>
     <dl>
-        <dt>在线客服QQ</dt>
+        <dt>客服热线</dt>
         <dd>
             <input name="qq" type="text" value="<#if setting??>${setting.qq!""}</#if>" class="input normal" datatype="n0-100" sucmsg=" ">
             <span class="Validform_checktip"></span>

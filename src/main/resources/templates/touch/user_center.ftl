@@ -26,23 +26,45 @@
 <body class="body_gray">
 <!-- header_top -->
 <dl class="l_ltitle">
-	<dt><a href="/touch/user/info" title="<#if setting??>${setting.title!''}-</#if>用户中心"><img src="${user.headImageUri!''}" alt="<#if setting??>${setting.title!''}-</#if>用户中心"></a></dt>
+	<dt><a href="javascript:changeHeads();" title="<#if setting??>${setting.title!''}-</#if>用户中心"><img src="${user.headImgUri!''}" alt="<#if setting??>${setting.title!''}-</#if>用户中心"></a></dt>
 	<dd class="dd1">${user.username!''}</dd>
-	<#--
-	<dd class="dd2">152*****608</dd>
-	<dd class="dd0"><a href="#" title=""></a></dd>
-	-->
+	<#-- 触屏版用户头像上传 -->
+	<form id="uploadImgForm" enctype="multipart/form-data" action="/touch/user/center/headImage" method="post">
+           <input style="display:none" name="Filedata" type="file"  capture="camera" accept="image/*" onchange="getFile();" id="filebutton">
+    </from>
+    <script>
+	    function changeHeads(){
+	        var filebutton = document.getElementById("filebutton");
+	        filebutton.click();
+	    }
+	    function getFile(){
+	        document.getElementById("uploadImgForm").submit();
+	        
+	    }
+    </script>
 </dl>
 <!-- header_top end -->
 <!-- 全部订单 -->
 <div class="l_all_orders">
-	<a href="#" title="" class="a1"><p>全部订单</p></a>
-	<a href="#" title="" class="a2">
+	<a href="/touch/user/order/list?type=0" title="<#if setting??>${setting.title!''}-</#if>全部订单" class="a1"><p>全部订单</p></a>
+	<a href="/touch/user/order/list?type=2" title="<#if setting??>${setting.title!''}-</#if>待付款订单" class="a2">
 		<p>待付款</p>
-		<span>1</span>
+		<#if unpay_number??&&unpay_number!=0>
+			<span>${unpay_number!'0'}</span>
+		</#if>
 	</a>
-	<a href="#" title="" class="a3"><p>待收货</p></a>
-	<a href="#" title="" class="a4"><p>待评价</p></a>
+	<a href="/touch/user/order/list?type=4" title="<#if setting??>${setting.title!''}-</#if>待收货订单" class="a2">
+		<p>待收货</p>
+		<#if unsign_number??&&unsign_number!=0>
+			<span>${unsign_number!'0'}</span>
+		</#if>
+	</a>
+	<a href="/touch/user/order/list?type=5" title="<#if setting??>${setting.title!''}-</#if>待评价订单" class="a2">
+		<p>待评价</p>
+		<#if uncomment_number??&&uncomment_number!=0>
+			<span>${uncomment_number!'0'}</span>
+		</#if>
+	</a>
 </div>
 <!-- 全部订单-结束 -->
 <!-- 分类1 -->
@@ -55,18 +77,18 @@
 <!-- 分类2 -->
 <div class="l_classify2">
 	<a href="/touch/user/info" title="<#if setting??>${setting.title!''}-</#if>个人信息"><p>个人信息</p></a>
-	<a href="#" title=""><p>修改密码</p></a>
+	<a href="#" title="<#if setting??>${setting.title!''}-</#if>修改密码"><p>修改密码</p></a>
 	<a href="/touch/user/address" title="<#if setting??>${setting.title!''}-</#if>收货地址"><p>收货地址</p></a>
-	<a href="#" title=""><p>积分抽奖</p></a>
-	<a href="#" title=""><p>意见反馈</p></a>
-	<a href="#" title=""><p>客服中心</p></a>
+	<a href="#" title="<#if setting??>${setting.title!''}-</#if>积分抽奖"><p>积分抽奖</p></a>
+	<a href="/touch/user/advice" title="<#if setting??>${setting.title!''}-</#if>意见反馈"><p>意见反馈</p></a>
+	<a <#if setting??>href="tel:${setting.qq!''}"</#if> title="<#if setting??>${setting.title!''}-</#if>客服中心"><p>客服中心</p></a>
 </div>
 <!-- 分类2-结束 -->
 
 <!-- footer -->
 <section class="footer">
 	<nav>
-		<a href="javascript:void(0);" title="<#if setting??>${setting.title!''}-</#if>首页">
+		<a href="/touch" title="<#if setting??>${setting.title!''}-</#if>首页">
 			<span>
 				<img alt="<#if setting??>${setting.title!''}-</#if>首页" src="/touch/images/footer_icon01.png"/>
 				<img alt="<#if setting??>${setting.title!''}-</#if>首页" src="/touch/images/footer_icon11.png"/>

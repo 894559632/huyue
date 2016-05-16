@@ -11,24 +11,24 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.ynyes.huyue.entity.TdCity;
-import com.ynyes.huyue.repository.TdCityRepo;
+import com.ynyes.huyue.entity.TdUserAdvice;
+import com.ynyes.huyue.repository.TdUserAdviceRepo;
 
 /**
- * 城市服务类
+ * 用户反馈服务类
  * 
  * @author 作者：DengXiao
- * @version 创建时间：2016年4月26日下午10:09:48
+ * @version 版本：下午4:38:02
  */
 
 @Service
 @Transactional
-public class TdCityService {
+public class TdUserAdviceService {
 
 	@Autowired
-	private TdCityRepo repository;
+	private TdUserAdviceRepo repository;
 
-	public TdCity save(TdCity e) {
+	public TdUserAdvice save(TdUserAdvice e) {
 		if (null == e) {
 			return null;
 		}
@@ -41,19 +41,19 @@ public class TdCityService {
 		}
 	}
 
-	public TdCity findOne(Long id) {
+	public TdUserAdvice findOne(Long id) {
 		if (null == id) {
 			return null;
 		}
 		return repository.findOne(id);
 	}
 
-	public List<TdCity> findAll() {
-		return (List<TdCity>) repository.findAll(new Sort(Direction.ASC, "sortId"));
+	public List<TdUserAdvice> findAll() {
+		return (List<TdUserAdvice>) repository.findAll();
 	}
 
-	public Page<TdCity> findAll(int page, int size) {
-		PageRequest pageRequest = new PageRequest(page, size);
+	public Page<TdUserAdvice> findAllOrderByAdviceTimeDesc(int page, int size) {
+		PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.DESC, "adviceTime"));
 		return repository.findAll(pageRequest);
 	}
 }
