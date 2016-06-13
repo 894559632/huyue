@@ -63,6 +63,11 @@
 					window.location.href = "/touch/pay/alipay?orderId=" + orderId;
 				break;
 			}
+			switch(title){
+                case "微信":
+                    window.location.href = "/touch/pay/wechat?orderId=" + orderId;
+                break;
+            }
 		}
 	}
 </script>
