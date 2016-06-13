@@ -68,7 +68,7 @@ public class TdOrderGoods {
     
     // 积分
     @Column
-    private Long points;
+    private Double points;
     
     // 是否申请了退还该商品？
     @Column
@@ -84,7 +84,7 @@ public class TdOrderGoods {
     
     // 兑换商品使用积分数
     @Column
-    private Long pointUse;
+    private Double pointUse;
 
     public Boolean getIsCommented() {
 		return isCommented;
@@ -102,11 +102,11 @@ public class TdOrderGoods {
 		this.commentId = commentId;
 	}
 
-	public Long getPointUse() {
+	public Double getPointUse() {
 		return pointUse;
 	}
 
-	public void setPointUse(Long pointUse) {
+	public void setPointUse(Double pointUse) {
 		this.pointUse = pointUse;
 	}
 
@@ -214,11 +214,11 @@ public class TdOrderGoods {
         this.isReturnApplied = isReturnApplied;
     }
 
-    public Long getPoints() {
+    public Double getPoints() {
         return points;
     }
 
-    public void setPoints(Long points) {
+    public void setPoints(Double points) {
         this.points = points;
     }
     

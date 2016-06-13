@@ -48,6 +48,7 @@
 	}
 </style>
 <script type="text/javascript">
+	var isAjax = true;
 	var page = 0;
 	$(function(){
 		goodsIn();
@@ -62,21 +63,26 @@
 					
 					var type = $("#type").val();
 					
-				    $.ajax({
-				    	type:"post",
-				    	url:"/touch/user/order/get",
-				    	data:{
-				    		type : type,
-				    		page : page
-				    	},
-				    	success:function(res){
-				    		var data = $("#data").html();
-				    		$("#data").html(data + res);
-				    		//测试用
-				    		//恢复高度(保留恢复高度)
-				    		$('html').height($(document).height());
-				    	}
-				    });
+					if(isAjax){
+						isAjax = false;
+						    $.ajax({
+						    	type:"post",
+						    	url:"/touch/user/order/get",
+						    	data:{
+						    		type : type,
+						    		page : page
+						    	},
+						    	success:function(res){
+						    		var data = $("#data").html();
+						    		$("#data").html(data + res);
+						    		//测试用
+						    		//恢复高度(保留恢复高度)
+						    		$('html').height($(document).height());
+						    		page += 1;
+						    		isAjax = true;
+						    	}
+						    });
+				    }
 				    //解除监听
 		    		$(document).unbind('scroll',ajaxFn);
 		    		//加载成功后恢复监听
@@ -103,8 +109,8 @@
 <div class="l_sure_order_select">
 	<a href="/touch/user/order/list?type=0" title="<#if setting??>${setting.title!''}-</#if>全部订单" <#if type??&&type==0>class="active"</#if>>全部</a>
 	<a href="/touch/user/order/list?type=2" title="<#if setting??>${setting.title!''}-</#if>待付款订单" <#if type??&&type==2>class="active"</#if>>待付款</a>
+	<a href="/touch/user/order/list?type=3" title="<#if setting??>${setting.title!''}-</#if>待发货订单" <#if type??&&type==3>class="active"</#if>>待发货</a>
 	<a href="/touch/user/order/list?type=4" title="<#if setting??>${setting.title!''}-</#if>待收货订单" <#if type??&&type==4>class="active"</#if>>待收货</a>
-	<a href="/touch/user/order/list?type=5" title="<#if setting??>${setting.title!''}-</#if>待评价订单" <#if type??&&type==5>class="active"</#if>>待评价</a>
 </div>
 <!-- 我的订单-分类选择 -->
 <!-- 我的订单-产品分类 -->
@@ -113,12 +119,13 @@
 	<#if order_page??&&order_page.content?size gt 0>
 		<#list order_page.content as item>
 			<#if item??>
-				<li>
+				<li id="${item.id?c}container">
 					<div class="li_title">
 						<label class="lab1">订单号：<span>${item.orderNumber!''}</span></label>
 						<#if item.statusId??>
 							<label class="lab2">
 								<#switch item.statusId>
+									<#case 1>待确认<#break>
 									<#case 2>待付款<#break>
 									<#case 3>待发货<#break>
 									<#case 4>待收货<#break>
@@ -129,11 +136,11 @@
 							</label>
 						</#if>
 					</div>
-					<#if item.orderGoodsList??&&orderGoodsList?size gt 0>
+					<#if item.orderGoodsList??&&item.orderGoodsList?size gt 0>
 						<#list item.orderGoodsList as goods>
 							<#if goods??>
 								<dl>
-									<dt><a href="/touch/goods/detail?id=${goods.goodsId?c}" title="<#if setting??>${setting.title!''}-</#if>${goods.goodsTitle!''}"><img src="${goods.goodsCoverImageUri!''}" alt="<#if setting??>${setting.title!''}-</#if>${goods.goodsTitle!''}"></a></dt>
+									<dt><a href="/touch/goods/detail/${goods.goodsId?c}" title="<#if setting??>${setting.title!''}-</#if>${goods.goodsTitle!''}"><img src="${goods.goodsCoverImageUri!''}" alt="<#if setting??>${setting.title!''}-</#if>${goods.goodsTitle!''}"></a></dt>
 									<dd class="dd1">${goods.goodsTitle!''}</dd>
 									<dd class="dd2">
 										<p class="p1">￥<#if goods.price??>${goods.price?string("0.00")}<#else>0.00</#if></p>
@@ -145,35 +152,31 @@
 					</#if>
 					<div class="li_all">共<span>${item.orderGoodsList?size!'0'}</span>件商品 合计：￥<span class="sp2"><#if item.totalPrice??>${item.totalPrice?string("0.00")}<#else>0.00</#if></span></div>
 					<div class="li_pay">
-						<a href="#" title="" class="a2">取消订单</a>
-						<a href="#" title="" class="a3">去支付</a>
+						<a href="/touch/order/detail/${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>查看详情" class="a2">查看详情</a>
 						<#if item.statusId??>
 							<#switch item.statusId>
+								<#case 1>
+									<a href="/touch/pay?orderId=${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>兑换奖品" class="a3">兑换奖品</a>
+								<#break>
 								<#case 2>
-									<a href="#" title="" class="a2">查看详情</a>
-									<a href="#" title="" class="a2">取消订单</a>
-									<a href="#" title="" class="a3">去支付</a>
+									<#if item.orderNumber??&&!item.orderNumber?contains("CJDD")>
+										<a href="javascript:cancelOrder(${item.id?c})" title="<#if setting??>${setting.title!''}-</#if>取消订单" class="a2">取消订单</a>
+									</#if>
+									<a href="/touch/pay?orderId=${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>去支付" class="a3">去支付</a>
 								<#break>
 								<#case 3>
-									<a href="#" title="" class="a2">查看详情</a>
-									<a href="#" title="" class="a2">取消订单</a>
-									<a href="#" title="" class="a2">取消订单</a>
+									<#--
+										<a href="javascript:cancelOrder(${item.id?c})" title="<#if setting??>${setting.title!''}-</#if>取消订单" class="a2">取消订单</a>
+									-->
 								<#break>
 								<#case 4>
-									<a href="#" title="" class="a2">查看详情</a>
-									<a href="#" title="" class="a2">取消订单</a>
-									<a href="#" title="" class="a3">确认收货</a>
+									<a href="javascript:signOrder(${item.id?c})" title="<#if setting??>${setting.title!''}-</#if>确认收货" class="a3">确认收货</a>
 								<#break>
 								<#case 5>
-									<a href="#" title="" class="a2">查看详情</a>
-									<a href="#" title="" class="a2">取消订单</a>
-									<a href="#" title="" class="a3">去评价</a>
+									<a href="/touch/user/order/comment?orderId=${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>" class="a3">去评价</a>
 								<#break>
 								<#case 6>
-									<a href="#" title="" class="a2">查看详情</a>
-								<#break>
-								<#case 7>
-									<a href="#" title="" class="a2">查看详情</a>
+									<a href="/touch/user/order/comment?orderId=${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>" class="a3">查看评价</a>
 								<#break>
 							</#switch>
 						</#if>
@@ -190,5 +193,55 @@
 		<span>正在加载...</span>
 	</div>
 </div>
+<script>
+	function cancelOrder(orderId){
+		var sure = confirm("是否确认取消");
+		if(sure){
+			$.ajax({
+				url : "/touch/order/cancel",
+				type : "POST",
+				data : {
+					id : orderId
+				},
+				success:function(res){
+					if( 0 !== res.status){
+						alert(res.message);
+						if(-2 === res.status){
+							window.location.href = "/touch/login";
+						}
+					}else{
+						var container = document.getElementById(orderId + "container");
+						container.parentNode.removeChild(container);
+					}
+				}
+			});
+		}
+	}
+	
+	function signOrder(orderId){
+		var sure = confirm("是否确认收货");
+		if(sure){
+			$.ajax({
+				url : "/touch/order/sign",
+				type : "POST",
+				data : {
+					id : orderId
+				},
+				success:function(res){
+					if( 0 !== res.status){
+						alert(res.message);
+						if(-2 === res.status){
+							window.location.href = "/touch/login";
+						}
+					}else{
+						var container = document.getElementById(orderId + "container");
+						container.parentNode.removeChild(container);
+					}
+				}
+			});
+		}
+	}
+	
+</script>
 </body>
 </html>

@@ -308,6 +308,8 @@ public interface TdGoodsRepo extends PagingAndSortingRepository<TdGoods, Long>, 
 
 	Page<TdGoods> findByIsRecommendIndexTrueAndIsOnSaleTrueAndIsPointGoodsTrueOrderBySortIdAsc(Pageable page);
 
+	List<TdGoods> findByIsOnSaleTrueAndIsPointGoodsTrueOrderBySortIdAsc();
+
 	Page<TdGoods> findByisHotTrueAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySoldNumberDesc(Pageable page);
 
 	/**
@@ -326,4 +328,15 @@ public interface TdGoodsRepo extends PagingAndSortingRepository<TdGoods, Long>, 
 
 	List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceDesc(Long categoryId);
 
+	List<TdGoods> findByIsOnSaleTrueAndIsPointGoodsFalseAndTitleContainingOrderBySalePriceAsc(String keywords);
+
+	List<TdGoods> findByIsOnSaleTrueAndIsPointGoodsFalseAndTitleContainingOrderBySalePriceDesc(String keywords);
+
+	List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseAndTitleContainingOrderBySalePriceAsc(
+			Long categoryId, String keywords);
+
+	List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseAndTitleContainingOrderBySalePriceDesc(
+			Long categoryId, String keywords);
+
+	TdGoods findByCode(String code);
 }

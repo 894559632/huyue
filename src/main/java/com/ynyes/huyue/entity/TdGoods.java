@@ -319,7 +319,7 @@ public class TdGoods {
     
     // 购买积分限额
     @Column
-    private Long pointLimited;
+    private Double pointLimited;
     
     // SEO标题
     @Column
@@ -1024,11 +1024,11 @@ public class TdGoods {
         this.outFactoryPrice = outFactoryPrice;
     }
 
-    public Long getPointLimited() {
+    public Double getPointLimited() {
         return pointLimited;
     }
 
-    public void setPointLimited(Long pointLimited) {
+    public void setPointLimited(Double pointLimited) {
         this.pointLimited = pointLimited;
     }
 }

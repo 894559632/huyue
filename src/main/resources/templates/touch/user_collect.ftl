@@ -37,9 +37,9 @@
 <!-- header_top end -->
 <!-- collect -->
 <div class="collect_nav">
-	<span <#if param=="0-0"||param=="0-1">class="span_active"</#if>><a href="/touch/user/collect?param=0-<#if param=="0-0">1<#else>0</#if>">默认</a></span>
-	<span <#if param=="1-0"||param=="1-1">class="span_active"</#if>><a href="/touch/user/collect?param=1-<#if param=="1-0">1<#else>0</#if>">销量</a></span>
-	<span <#if param=="2-0"||param=="2-1">class="span_active"</#if>><a href="/touch/user/collect?param=2-<#if param=="2-0">1<#else>0</#if>">价格</a></span>
+	<a href="/touch/user/collect?param=0-<#if param=="0-0">1<#else>0</#if>"><span <#if param=="0-0"||param=="0-1">class="span_active"</#if>>默认</span></a>
+	<a href="/touch/user/collect?param=1-<#if param=="1-0">1<#else>0</#if>"><span <#if param=="1-0"||param=="1-1">class="span_active"</#if>>销量</span></a>
+	<a href="/touch/user/collect?param=2-<#if param=="2-0">1<#else>0</#if>"><span <#if param=="2-0"||param=="2-1">class="span_active"</#if>>价格</span></a>
 </div>
 <!-- collect end -->
 <!-- buy_car  -->
@@ -49,7 +49,7 @@
 			<#if item??>
 				<li class="history_box" id="container${item.id?c}">
 					<div class="test">
-						<div class="box">
+						<div class="box" onclick="window.location.href='/touch/goods/detail/${item.goodsId?c}'">
 							<img class="history" alt="<#if setting??>${setting.title!''}-</#if>${item.goodsTitle!''}" src="${item.goodsCoverImageUri!''}"/>
 							<div class="text">
 								<p>${item.goodsTitle!''}</p>

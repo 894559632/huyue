@@ -37,6 +37,10 @@ public class TdOrder {
     @JoinColumn(name="tdOrderId")
     private List<TdOrderGoods> orderGoodsList;
     
+    //收获城市
+    @Column
+    private String shippingCity;
+    
     // 收货地址
     @Column
     private String shippingAddress;
@@ -230,11 +234,11 @@ public class TdOrder {
     
     // 使用积分数 
     @Column
-    private Long pointUse;
+    private Double pointUse;
     
     // 可获取积分
     @Column
-    private Long points;
+    private Double points;
     
     // 使用虚拟货币
     @Column
@@ -258,6 +262,9 @@ public class TdOrder {
     // 分享用户可获取积分
     @Column
     private Long totalSharePoints;
+    
+    @Column
+    private String realName;
     
     public Long getTotalSharePoints() {
 		return totalSharePoints;
@@ -635,11 +642,11 @@ public class TdOrder {
         this.sortId = sortId;
     }
 
-    public Long getPoints() {
+    public Double getPoints() {
         return points;
     }
 
-    public void setPoints(Long points) {
+    public void setPoints(Double points) {
         this.points = points;
     }
 
@@ -667,11 +674,11 @@ public class TdOrder {
         this.commentTime = commentTime;
     }
 
-    public Long getPointUse() {
+    public Double getPointUse() {
         return pointUse;
     }
 
-    public void setPointUse(Long pointUse) {
+    public void setPointUse(Double pointUse) {
         this.pointUse = pointUse;
     }
     
@@ -706,6 +713,22 @@ public class TdOrder {
 
 	public void setSpareShippingPhone(String spareShippingPhone) {
 		this.spareShippingPhone = spareShippingPhone;
+	}
+
+	public String getShippingCity() {
+		return shippingCity;
+	}
+
+	public void setShippingCity(String shippingCity) {
+		this.shippingCity = shippingCity;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
 }

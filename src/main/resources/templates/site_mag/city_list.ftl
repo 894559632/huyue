@@ -68,6 +68,7 @@ var theForm = document.forms['form1'];
   </tr>
     <#if city_page??>
         <#list city_page.content as item>
+        	<#if item??>
             <tr>
                 <td align="center">
                     <span class="checkall" style="vertical-align:middle;">
@@ -76,9 +77,10 @@ var theForm = document.forms['form1'];
                     <input type="hidden" name="listId" id="listId" value="${item.id?c}">
                 </td>
                 <td align="left"><a href="/Verwalter/setting/city/edit?id=${item.id?c}">${item.title!""}</a></td>
-                <td align="left"><#if item.isEnable>是<#else>否</#if></td>
+                <td align="left"><#if item.isEnable??&&item.isEnable>是<#else>否</#if></td>
                 <td align="center">${item.sortId!""}</td>
             </tr>
+            </#if>
         </#list>
     </#if>
 </tbody>

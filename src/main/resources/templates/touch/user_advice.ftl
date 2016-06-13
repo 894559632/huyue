@@ -41,7 +41,7 @@
 		<h3>您的联系电话</h3>
 		<input type="text" name="phone" id="phone" value="${username!''}" />
 	</div>
-	<input style="width: 100%;height: 0.74rem;position: fixed;left: 0px;bottom: 0px;border: none;outline-color: none;color: white;background: #da251e;font-size: 0.28rem;" type="button" onclick="base.user.advice.save();" value="提交" />
+	<input style="-webkit-appearance:none;width: 100%;height: 0.74rem;position: fixed;left: 0px;bottom: 0px;border: none;outline-color: none;color: white;background: #da251e;font-size: 0.28rem;" type="button" onclick="base.user.advice.save();" value="提交" />
 </div>
 <!-- advice end -->
 </body>

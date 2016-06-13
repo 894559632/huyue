@@ -66,4 +66,40 @@ public class TdCodeController {
 		return map;
 
 	}
+	
+	@RequestMapping(value = "/change/password")
+	@ResponseBody
+	public Map<String, Object> codeChangePassword(String mobile, HttpServletResponse response, HttpServletRequest request) {
+		Random random = new Random();
+
+		String smscode = String.format("%04d", random.nextInt(9999));
+
+		HttpSession session = request.getSession();
+
+		session.setAttribute("PWDCODE", smscode);
+
+		HashMap<String, Object> map = SMSUtil.send(mobile, "86846", new String[] { smscode, "5" });
+		
+		map.put("status", "0");
+		map.put("code", smscode);
+		return map;
+	}
+	
+	@RequestMapping(value = "/reset/password")
+	@ResponseBody
+	public Map<String, Object> codeResetPassword(String mobile, HttpServletResponse response, HttpServletRequest request) {
+		Random random = new Random();
+
+		String smscode = String.format("%04d", random.nextInt(9999));
+
+		HttpSession session = request.getSession();
+
+		session.setAttribute("RESETCODE", smscode);
+
+		HashMap<String, Object> map = SMSUtil.send(mobile, "91018", new String[] { smscode, "5" });
+		
+		map.put("status", "0");
+		map.put("code", smscode);
+		return map;
+	}
 }

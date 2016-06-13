@@ -33,7 +33,7 @@
 	<input class="text" type="text" placeholder="手机号" name="username" id="username" />
 	<input class="text" type="password" placeholder="密码" name="password" id="password" />
 	<input class="sub" type="submit" name="" id="" value="登录" />
-	<p class="forget_secret">忘记密码 ?</p>
+	<p onclick="window.location.href='/touch/reset/password'" class="forget_secret">忘记密码 ?</p>
 	<div class="other_onload">
 		<div>
 			<span class="left_line"></span>其他方式登录<span class="right_line"></span>

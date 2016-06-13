@@ -40,7 +40,7 @@
 <!-- footer -->
 <section class="footer">
 	<nav>
-		<a href="javascript:void(0);" title="<#if setting??>${setting.title!''}-</#if>首页">
+		<a href="/touch" title="<#if setting??>${setting.title!''}-</#if>首页">
 			<span>
 				<img alt="<#if setting??>${setting.title!''}-</#if>首页" src="/touch/images/footer_icon01.png"/>
 				<img alt="<#if setting??>${setting.title!''}-</#if>首页" src="/touch/images/footer_icon11.png"/>
@@ -61,7 +61,7 @@
 			</span>
 			<label class="active_label">购物车</label>
 		</a>
-		<a href="#" title="<#if setting??>${setting.title!''}-</#if>抽奖">
+		<a href="/touch/lottery" title="<#if setting??>${setting.title!''}-</#if>抽奖">
 			<span>
 				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/footer_icon04.png"/>
 				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/footer_icon44.png"/>

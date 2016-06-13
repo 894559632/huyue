@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.huyue.entity.TdCartGoods;
@@ -63,7 +64,7 @@ public class TdTouchCartGoodsController {
 		return "/touch/cart_goods";
 	}
 
-	@RequestMapping(value = "change")
+	@RequestMapping(value = "/change")
 	@ResponseBody
 	public Map<String, Object> touchCartChange(HttpServletRequest req, ModelMap map, Long id, Long operate) {
 		Map<String, Object> res = new HashMap<>();
@@ -115,6 +116,27 @@ public class TdTouchCartGoodsController {
 		Long orderId = tdCommonService.createOrder(data, user);
 
 		res.put("id", orderId);
+		res.put("status", 0);
+		return res;
+	}
+
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> touchCartRemove(HttpServletRequest req, ModelMap map, Long cartId) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+
+		// 判断用户是否登录
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			res.put("status", -2);
+			res.put("message", "请先登录");
+			return res;
+		}
+
+		// 删除购物车项
+		tdCartGoodsService.delete(cartId);
+
 		res.put("status", 0);
 		return res;
 	}

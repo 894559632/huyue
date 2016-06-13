@@ -65,6 +65,14 @@ public class TdGoodsService {
 	 *            排序方向
 	 * @return
 	 */
+
+	public TdGoods save(TdGoods goods) {
+		if (null == goods) {
+			return null;
+		}
+		return repository.save(goods);
+	}
+
 	public Page<TdGoods> searchGoods(String keywords, int page, int size, String sortName, Direction dir) {
 		if (null == keywords || null == sortName) {
 			return null;
@@ -1957,7 +1965,7 @@ public class TdGoodsService {
 		}
 
 		// 参数类型ID
-		Long paramCategoryId = null;
+		// Long paramCategoryId = null;
 
 		// 保存分类名称
 		if (null != e.getCategoryId()) {
@@ -1965,7 +1973,7 @@ public class TdGoodsService {
 			e.setCategoryTitle(cat.getTitle());
 			e.setCategoryIdTree(cat.getParentTree());
 
-			paramCategoryId = cat.getParamCategoryId();
+			// paramCategoryId = cat.getParamCategoryId();
 		}
 
 		// 保存品牌名称
@@ -2063,8 +2071,22 @@ public class TdGoodsService {
 		return repository.findByIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceAsc();
 	}
 
+	public List<TdGoods> findByIsOnSaleTrueAndIsPointGoodsFalseAndTitleContainingOrderBySalePriceAsc(String keywords) {
+		if (null == keywords) {
+			return null;
+		}
+		return repository.findByIsOnSaleTrueAndIsPointGoodsFalseAndTitleContainingOrderBySalePriceAsc(keywords);
+	}
+
 	public List<TdGoods> findByIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceDesc() {
 		return repository.findByIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceDesc();
+	}
+
+	public List<TdGoods> findByIsOnSaleTrueAndIsPointGoodsFalseAndTitleContainingOrderBySalePriceDesc(String keywords) {
+		if (null == keywords) {
+			return null;
+		}
+		return repository.findByIsOnSaleTrueAndIsPointGoodsFalseAndTitleContainingOrderBySalePriceDesc(keywords);
 	}
 
 	public List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceAsc(Long categoryId) {
@@ -2074,10 +2096,39 @@ public class TdGoodsService {
 		return repository.findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceAsc(categoryId);
 	}
 
+	public List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseAndTitleContainingOrderBySalePriceAsc(
+			Long categoryId, String keywords) {
+		if (null == categoryId || null == keywords) {
+			return null;
+		}
+		return repository.findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseAndTitleContainingOrderBySalePriceAsc(
+				categoryId, keywords);
+	}
+
 	public List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceDesc(Long categoryId) {
 		if (null == categoryId) {
 			return null;
 		}
 		return repository.findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseOrderBySalePriceDesc(categoryId);
+	}
+
+	public List<TdGoods> findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseAndTitleContainingOrderBySalePriceDesc(
+			Long categoryId, String keywords) {
+		if (null == categoryId || null == keywords) {
+			return null;
+		}
+		return repository.findByCategoryIdAndIsOnSaleTrueAndIsPointGoodsFalseAndTitleContainingOrderBySalePriceDesc(
+				categoryId, keywords);
+	}
+
+	public List<TdGoods> findByIsOnSaleTrueAndIsPointGoodsTrueOrderBySortIdAsc() {
+		return repository.findByIsOnSaleTrueAndIsPointGoodsTrueOrderBySortIdAsc();
+	}
+
+	public TdGoods findByCode(String code) {
+		if (null == code) {
+			return null;
+		}
+		return repository.findByCode(code);
 	}
 }

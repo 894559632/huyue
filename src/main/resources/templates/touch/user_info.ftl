@@ -62,7 +62,7 @@
 			<a href="javascript:void(0);" title="<#if setting??>${setting.title!''}-</#if>性别">
 				<label>性别</label>
 				<div></div>
-				<select name="sex" id="l_se">
+				<select style="-webkit-appearance:none;" name="sex" id="l_se">
 					<option value="0">请选择</option>
 					<option value="男" <#if user??&&user.sex??&&user.sex=="男">selected="selected"</#if>>男</option>
 					<option value="女" <#if user??&&user.sex??&&user.sex=="女">selected="selected"</#if>>女</option>
@@ -73,7 +73,7 @@
 			<a href="javascript:void(0);" title="<#if setting??>${setting.title!''}-</#if>性别">
 				<label>城市</label>
 				<div></div>
-				<select name="cityId" id="l_se">
+				<select style="-webkit-appearance:none;" name="cityId" id="l_se">
 					<option value="0">请选择</option>
 					<#if city_list??>
 						<#list city_list as item>
@@ -87,7 +87,7 @@
 		</li>
 	</ul>
 	<div style="width:100%;height:0.9rem"></div>
-	<input type="submit" value="保存" id="l_save">
+	<input type="submit" style="-webkit-appearance:none;" value="保存" id="l_save">
 </form>
 <!-- personage end -->
 </body>

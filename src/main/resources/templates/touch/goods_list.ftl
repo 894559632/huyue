@@ -45,7 +45,7 @@
 .search_box .sub {
   float: right;
   width: 19%;
-  background: url(/images/top_header_search.png) no-repeat center;
+  background: url(/touch/images/top_header_search.png) no-repeat center;
   background-size: 0.3rem 0.3rem;
 }
 </style>
@@ -74,11 +74,11 @@
 <!-- header_top -->
 <section class="container">
 	<div class="top_heater">
-		<a href="/touch" title="" class="header_back"></a>
+		<a href="/touch" title="<#if setting??>${setting.title!''}-</#if>返回" class="header_back"></a>
 		<span>商品分类</span>
 		<a class="header_search"></a>
-		<form class="search_box">
-			<input class="text" type="text" placeholder="请输入搜索内容" name="" id="" value="" />
+		<form class="search_box" action="/touch/goods">
+			<input class="text" type="text" placeholder="请输入商品的名称" name="keywords" value="${keywords!''}" />
 			<input class="sub" type="submit" name="" id="" value="" />
 		</form>
 	</div>
@@ -107,7 +107,7 @@
 								<#if ("level_two"+item_index)?eval??>
 									<#list ("level_two"+item_index)?eval as sub_item>
 										<#if sub_item??>
-											<a href="/touch/goods?categoryId=${sub_item.id?c}<#if sort??>&sort=${sort!'0'}</#if>" <#if level_two_id??&&level_two_id?c==sub_item.id?c>style="color:#e64b49;"</#if> title="<#if setting??>${setting.title!''}-${sub_item.seoTitle!''}</#if>">${sub_item.title!''}<label></label></a>
+											<a href="/touch/goods?categoryId=${sub_item.id?c}<#if sort??>&sort=${sort!'0'}</#if><#if keywords??>&keywords=${keywords!''}</#if>" <#if level_two_id??&&level_two_id?c==sub_item.id?c>style="color:#e64b49;"</#if> title="<#if setting??>${setting.title!''}-${sub_item.seoTitle!''}</#if>">${sub_item.title!''}<label></label></a>
 										</#if>
 									</#list>
 								</#if>
@@ -118,7 +118,7 @@
 			</dd>
 		</dl>
 	</div>
-	<div class="list_box" onclick="window.location.href='/touch/goods?sort=<#if sort??&&sort=0>1<#else>0</#if><#if level_two_id??>&categoryId=${level_two_id?c}</#if>'">
+	<div class="list_box" onclick="window.location.href='/touch/goods?sort=<#if sort??&&sort=0>1<#else>0</#if><#if level_two_id??>&categoryId=${level_two_id?c}</#if><#if keywords??>&keywords=${keywords!''}</#if>'">
 		<span class="name">价格排序</span>
 		<label class="guide <#if sort??&&sort==0>up</#if>"></label>
 	</div>
@@ -131,7 +131,11 @@
 					<a title="<#if setting??>${setting.title!''}-</#if>${item.title!''}">
 						<img alt="<#if setting??>${setting.title!''}-</#if>${item.title!''}" src="${item.coverImageUri!''}"/>
 					</a>
-					<p class="name">${item.title!''}</p>
+					<p class="name" style="
+										width:100%;
+										white-space: nowrap;
+				          				text-overflow: ellipsis;
+				          				overflow: hidden;">${item.title!''}</p>
 					<label class="money">￥<#if item.salePrice??>${item.salePrice?string("0.00")}<#else>0.00</#if></label>
 					<span class="paid">${item.soldNumber!'0'}人已买</span>
 				</li>

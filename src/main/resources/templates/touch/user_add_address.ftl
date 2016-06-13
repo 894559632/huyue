@@ -66,7 +66,7 @@
 		</a>
 	</li>
 </ul>
-<input class="footer_btn" type="button" onclick="base.user.city.save();" value="保 存" />
+<input class="footer_btn" style="-webkit-appearance:none;" type="button" onclick="base.user.city.save();" value="保 存" />
 <!-- personage end -->
 </body>
 </html>

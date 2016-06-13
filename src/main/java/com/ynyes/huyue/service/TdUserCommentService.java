@@ -297,4 +297,11 @@ public class TdUserCommentService {
         
         return (List<TdUserComment>) repository.save(entities);
     }
+    
+    public TdUserComment findByOrderNumberAndUsernameAndGoodsId(String orderNumber,String username,Long goodsId){
+    	if(null == orderNumber || null == username || null == goodsId){
+    		return null;
+    	}
+    	return repository.findByOrderNumberAndUsernameAndGoodsId(orderNumber,username,goodsId);
+    }
 }

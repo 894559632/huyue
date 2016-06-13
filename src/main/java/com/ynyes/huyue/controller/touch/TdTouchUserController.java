@@ -22,22 +22,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ynyes.huyue.entity.TdCity;
+import com.ynyes.huyue.entity.TdExchangeLog;
+import com.ynyes.huyue.entity.TdGoods;
 import com.ynyes.huyue.entity.TdOrder;
+import com.ynyes.huyue.entity.TdOrderGoods;
+import com.ynyes.huyue.entity.TdPointLog;
 import com.ynyes.huyue.entity.TdSetting;
 import com.ynyes.huyue.entity.TdShippingAddress;
 import com.ynyes.huyue.entity.TdUser;
 import com.ynyes.huyue.entity.TdUserAdvice;
 import com.ynyes.huyue.entity.TdUserCollect;
+import com.ynyes.huyue.entity.TdUserComment;
 import com.ynyes.huyue.entity.TdUserVisited;
 import com.ynyes.huyue.service.TdCityService;
+import com.ynyes.huyue.service.TdExchangeLogService;
+import com.ynyes.huyue.service.TdGoodsService;
 import com.ynyes.huyue.service.TdOrderService;
+import com.ynyes.huyue.service.TdPointLogService;
 import com.ynyes.huyue.service.TdSettingService;
 import com.ynyes.huyue.service.TdShippingAddressService;
 import com.ynyes.huyue.service.TdUserAdviceService;
 import com.ynyes.huyue.service.TdUserCollectService;
+import com.ynyes.huyue.service.TdUserCommentService;
 import com.ynyes.huyue.service.TdUserService;
 import com.ynyes.huyue.service.TdUserVisitedService;
 import com.ynyes.huyue.util.ClientConstant;
+import com.ynyes.huyue.util.MD5;
 import com.ynyes.huyue.util.SiteMagConstant;
 
 /**
@@ -71,9 +81,21 @@ public class TdTouchUserController {
 
 	@Autowired
 	private TdOrderService tdOrderService;
-	
+
 	@Autowired
 	private TdUserAdviceService tdUserAdviceService;
+
+	@Autowired
+	private TdGoodsService tdGoodsService;
+
+	@Autowired
+	private TdPointLogService tdPointLogService;
+
+	@Autowired
+	private TdExchangeLogService tdExchangeLogService;
+
+	@Autowired
+	private TdUserCommentService tdUserCommentService;
 
 	@RequestMapping
 	public String touchUser(HttpServletRequest req, ModelMap map) {
@@ -89,13 +111,13 @@ public class TdTouchUserController {
 		Long unpay_number = tdOrderService.findCountByUsernameAndStatusId(username, 2L);
 		map.addAttribute("unpay_number", unpay_number);
 
+		// 获取用户带评价订单的数量
+		Long uncomment_number = tdOrderService.findCountByUsernameAndStatusId(username, 3L);
+		map.addAttribute("uncomment_number", uncomment_number);
+
 		// 获取用户待收货订单的数量
 		Long unsign_number = tdOrderService.findCountByUsernameAndStatusId(username, 4L);
 		map.addAttribute("unsign_number", unsign_number);
-
-		// 获取用户带评价订单的数量
-		Long uncomment_number = tdOrderService.findCountByUsernameAndStatusId(username, 5L);
-		map.addAttribute("uncomment_number", uncomment_number);
 
 		// 获取网站设置信息
 		TdSetting setting = tdSettingService.findTopBy();
@@ -193,8 +215,6 @@ public class TdTouchUserController {
 			}
 		}
 
-		user_collect_page = tdUserCollectService.findByUsernameOrderByCollectTimeDesc(username, 0,
-				ClientConstant.pageSize);
 		map.addAttribute("user_collect_page", user_collect_page);
 
 		// 获取网站设置信息
@@ -469,11 +489,11 @@ public class TdTouchUserController {
 		}
 
 		if (0L == type.longValue()) {
-			Page<TdOrder> order_page = tdOrderService.findByUsernameOrderByOrderTimeDesc(username, 0, 10);
+			Page<TdOrder> order_page = tdOrderService.findByUsernameOrderByOrderTimeDesc(username, 0, 5);
 			map.addAttribute("order_page", order_page);
 		} else {
 			Page<TdOrder> order_page = tdOrderService.findByUsernameAndStatusIdOrderByOrderTimeDesc(username, type, 0,
-					10);
+					5);
 			map.addAttribute("order_page", order_page);
 		}
 
@@ -494,11 +514,11 @@ public class TdTouchUserController {
 	public String touchUserOrderGet(HttpServletRequest req, ModelMap map, Long type, Integer page) {
 		String username = (String) req.getSession().getAttribute("username");
 		if (0L == type.longValue()) {
-			Page<TdOrder> order_page = tdOrderService.findByUsernameOrderByOrderTimeDesc(username, (page + 1), 10);
+			Page<TdOrder> order_page = tdOrderService.findByUsernameOrderByOrderTimeDesc(username, (page + 1), 5);
 			map.addAttribute("order_page", order_page);
 		} else {
 			Page<TdOrder> order_page = tdOrderService.findByUsernameAndStatusIdOrderByOrderTimeDesc(username, type,
-					(page + 1), 10);
+					(page + 1), 5);
 			map.addAttribute("order_page", order_page);
 		}
 		return "/touch/user_order_info";
@@ -536,6 +556,217 @@ public class TdTouchUserController {
 		advice.setPhone(phone);
 		advice.setIsReply(false);
 		tdUserAdviceService.save(advice);
+
+		res.put("status", 0);
+		return res;
+	}
+
+	@RequestMapping(value = "/point")
+	public String touchUserPoint(HttpServletRequest req, ModelMap map) {
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			return "redirect:/touch/login";
+		}
+		TdUser user = tdUserService.findByUsername(username);
+		map.addAttribute("user", user);
+
+		// 获取所有的积分商品
+		List<TdGoods> goods_list = tdGoodsService.findByIsOnSaleTrueAndIsPointGoodsTrueOrderBySortIdAsc();
+		map.addAttribute("goods_list", goods_list);
+
+		// 获取网站设置信息
+		TdSetting setting = tdSettingService.findTopBy();
+		map.addAttribute("setting", setting);
+		return "/touch/user_point";
+	}
+
+	@RequestMapping(value = "/point/detail")
+	public String touchUserPointDetail(HttpServletRequest req, ModelMap map) {
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			return "redirect:/touch/login";
+		}
+
+		Page<TdPointLog> point_page = tdPointLogService.findByUsernameOrderByChangeTimeDesc(username, 0, 20);
+		map.addAttribute("point_page", point_page);
+
+		// 获取网站设置信息
+		TdSetting setting = tdSettingService.findTopBy();
+		map.addAttribute("setting", setting);
+
+		return "/touch/point_detail";
+	}
+
+	@RequestMapping(value = "/point/detail/get", method = RequestMethod.POST)
+	public String touchUserPointDetailGet(HttpServletRequest req, ModelMap map, Integer page) {
+		String username = (String) req.getSession().getAttribute("username");
+
+		Page<TdPointLog> point_page = tdPointLogService.findByUsernameOrderByChangeTimeDesc(username, (page + 1), 20);
+		map.addAttribute("point_page", point_page);
+
+		// 获取网站设置信息
+		TdSetting setting = tdSettingService.findTopBy();
+		map.addAttribute("setting", setting);
+
+		return "/touch/point_detail_data";
+	}
+
+	@RequestMapping(value = "/point/exchange")
+	public String touchUserPointExchange(HttpServletRequest req, ModelMap map) {
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			return "redirect:/touch/login";
+		}
+		// 获取该用户的兑换记录
+		Page<TdExchangeLog> exchange_page = tdExchangeLogService.findByUsernameOrderByExchangeTimeDesc(username, 0, 20);
+		map.addAttribute("exchange_page", exchange_page);
+
+		// 获取网站设置信息
+		TdSetting setting = tdSettingService.findTopBy();
+		map.addAttribute("setting", setting);
+		return "/touch/exchange_detail";
+	}
+
+	@RequestMapping(value = "/point/exchange/detail/get", method = RequestMethod.POST)
+	public String touchUserPointExchangeDetailGet(HttpServletRequest req, ModelMap map, Integer page) {
+		String username = (String) req.getSession().getAttribute("username");
+
+		// 获取该用户的兑换记录
+		Page<TdExchangeLog> exchange_page = tdExchangeLogService.findByUsernameOrderByExchangeTimeDesc(username,
+				(page + 1), 20);
+		map.addAttribute("exchange_page", exchange_page);
+
+		// 获取网站设置信息
+		TdSetting setting = tdSettingService.findTopBy();
+		map.addAttribute("setting", setting);
+
+		return "/touch/point_detail_data";
+	}
+
+	@RequestMapping(value = "/password")
+	public String touchUserPassword(HttpServletRequest req, ModelMap map) {
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			return "redirect:/touch/login";
+		}
+
+		map.addAttribute("username", username);
+
+		// 获取网站设置信息
+		TdSetting setting = tdSettingService.findTopBy();
+		map.addAttribute("setting", setting);
+		return "/touch/user_password";
+	}
+
+	@RequestMapping(value = "/password/change")
+	@ResponseBody
+	public Map<String, Object> touchUserPasswordChange(HttpServletRequest req, ModelMap map, String phone,
+			String smscode, String password) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+
+		String PWDCODE = (String) req.getSession().getAttribute("PWDCODE");
+		if (!(null != PWDCODE && PWDCODE.equalsIgnoreCase(smscode))) {
+			res.put("message", "您输入的验证码不正确");
+			return res;
+		}
+
+		String username = (String) req.getSession().getAttribute("username");
+		TdUser user = tdUserService.findByUsername(username);
+
+		if (null == user) {
+			res.put("message", "未查询到相关用户的信息");
+			return res;
+		}
+
+		user.setPassword(MD5.md5(password, 32));
+		tdUserService.save(user);
+
+		res.put("status", 0);
+		return res;
+	}
+
+	/**
+	 * 查看订单评价或去评价的方法
+	 * 
+	 * @author 作者：DengXiao
+	 * @version 版本：20162016年6月6日上午11:30:34
+	 */
+	@RequestMapping(value = "/order/comment")
+	public String touchUserOrderComment(HttpServletRequest req, ModelMap map, Long orderId) {
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			return "redirect:/touch/login";
+		}
+
+		// 查询到指定的订单
+		TdOrder order = tdOrderService.findOne(orderId);
+		if (null != order && null != order.getOrderGoodsList() && order.getOrderGoodsList().size() > 0) {
+			map.addAttribute("orderGoodsList", order.getOrderGoodsList());
+			map.addAttribute("orderNumber", order.getOrderNumber());
+			for (TdOrderGoods orderGoods : order.getOrderGoodsList()) {
+				if (null != orderGoods) {
+					// 查询到指定的商品评价
+					TdUserComment comment = tdUserCommentService.findByOrderNumberAndUsernameAndGoodsId(
+							order.getOrderNumber(), username, orderGoods.getGoodsId());
+
+					map.addAttribute("comment" + orderGoods.getGoodsId(), comment);
+				}
+			}
+		}
+
+		if (null == order.getCommentTime()) {
+			map.addAttribute("readOnly", false);
+		} else {
+			map.addAttribute("readOnly", true);
+		}
+
+		// 获取网站设置信息
+		TdSetting setting = tdSettingService.findTopBy();
+		map.addAttribute("setting", setting);
+		return "/touch/user_order_comment";
+	}
+
+	@RequestMapping(value = "/order/comment/save", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> touchUserOrderCommentSave(HttpServletRequest req, ModelMap map, String orderNumber,
+			String[] comments, Long[] stars) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			res.put("status", -2);
+			res.put("message", "请先登录");
+			return res;
+		}
+
+		TdUser user = tdUserService.findByUsername(username);
+
+		// 获取指定的订单
+		TdOrder order = tdOrderService.findByOrderNumber(orderNumber);
+		if (null != order && null != order.getOrderGoodsList() && order.getOrderGoodsList().size() > 0) {
+
+			for (int i = 0; i < order.getOrderGoodsList().size(); i++) {
+				TdOrderGoods orderGoods = order.getOrderGoodsList().get(i);
+				TdUserComment comment = new TdUserComment();
+				comment.setContent(comments[i]);
+				comment.setStars(stars[i]);
+				comment.setCommentTime(new Date());
+				comment.setGoodsId(orderGoods.getGoodsId());
+				comment.setGoodsTitle(orderGoods.getGoodsTitle());
+				comment.setGoodsCoverImageUri(orderGoods.getGoodsCoverImageUri());
+				comment.setOrderNumber(orderNumber);
+				comment.setUsername(username);
+				comment.setUserHeadUri(user.getHeadImgUri());
+				comment.setStatusId(1L);
+				tdUserCommentService.save(comment);
+			}
+
+			order.setStatusId(6L);
+			order.setCommentTime(new Date());
+			tdOrderService.save(order);
+		}
 
 		res.put("status", 0);
 		return res;

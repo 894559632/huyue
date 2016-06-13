@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.huyue.entity.TdAd;
@@ -121,9 +122,60 @@ public class TdTouchIndexController {
 			return res;
 		}
 
+		// 设置session失效时间为1分钟
+		req.getSession().setMaxInactiveInterval(3600);
 		req.getSession().setAttribute("username", username);
 
 		res.put("status", 0);
 		return res;
+	}
+
+	@RequestMapping(value = "/logout")
+	public String logout(HttpServletRequest req) {
+		req.getSession().removeAttribute("username");
+		return "redirect:/touch/login";
+	}
+
+	@RequestMapping(value = "/reset/password")
+	public String touchResetPassword() {
+		return "/touch/reset_password";
+	}
+
+	@RequestMapping(value = "/resetpassword/check", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> touchResetPasswordCheck(String phone) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+
+		TdUser user = tdUserService.findByUsername(phone);
+		if (null == user) {
+			return res;
+		}
+
+		res.put("status", 0);
+		return res;
+	}
+
+	@RequestMapping(value = "/resetpassword/code/check")
+	@ResponseBody
+	public Map<String, Object> touchResetPasswordCodeCheck(HttpServletRequest req, String code) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+		String RESETCODE = (String) req.getSession().getAttribute("RESETCODE");
+
+		if (!(null != code && code.equalsIgnoreCase(RESETCODE))) {
+			return res;
+		}
+
+		res.put("status", 0);
+		return res;
+	}
+
+	@RequestMapping(value = "/reset/password/save")
+	public String touchResetPasswordSave(HttpServletRequest req, ModelMap map, String phone, String password) {
+		TdUser user = tdUserService.findByUsername(phone);
+		user.setPassword(MD5.md5(password, 32));
+		tdUserService.save(user);
+		return "redirect:/touch/login";
 	}
 }

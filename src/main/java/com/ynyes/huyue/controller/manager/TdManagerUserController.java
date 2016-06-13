@@ -1,5 +1,6 @@
 package com.ynyes.huyue.controller.manager;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,8 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.huyue.entity.TdCity;
 import com.ynyes.huyue.entity.TdUser;
+import com.ynyes.huyue.entity.TdUserAdvice;
 import com.ynyes.huyue.service.TdCityService;
 import com.ynyes.huyue.service.TdManagerLogService;
+import com.ynyes.huyue.service.TdUserAdviceService;
+import com.ynyes.huyue.service.TdUserCommentService;
 import com.ynyes.huyue.service.TdUserService;
 import com.ynyes.huyue.util.MD5;
 import com.ynyes.huyue.util.SiteMagConstant;
@@ -43,6 +47,12 @@ public class TdManagerUserController {
 
 	@Autowired
 	private TdCityService tdCityService;
+
+	@Autowired
+	private TdUserAdviceService tdUserAdviceService;
+	
+	@Autowired
+	private TdUserCommentService tdUserCommentService;
 
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	@ResponseBody
@@ -220,6 +230,91 @@ public class TdManagerUserController {
 		return "redirect:/Verwalter/user/list/";
 	}
 
+	/*----------------用户投诉咨询 begin ------------------*/
+	@RequestMapping(value = "/suggestion/list")
+	public String list(Integer page, Integer size, String __EVENTTARGET, String date_1, String date_2, String keywords,
+			Long categoryId, String __EVENTARGUMENT, String __VIEWSTATE, Long[] listId, Integer[] listChkId,
+			Long[] listSortId, ModelMap map, HttpServletRequest req) throws ParseException {
+		String username = (String) req.getSession().getAttribute("manager");
+		if (null == username) {
+			return "redirect:/Verwalter/login";
+		}
+		if (null != __EVENTTARGET) {
+			if (__EVENTTARGET.equalsIgnoreCase("btnPage")) {
+				if (null != __EVENTARGUMENT) {
+					page = Integer.parseInt(__EVENTARGUMENT);
+				}
+			} else if (__EVENTTARGET.equalsIgnoreCase("btnDelete")) {
+				btnDelete("suggestion", listId, listChkId);
+			}
+		}
+
+		if (null == page || page < 0) {
+			page = 0;
+		}
+
+		if (null == size || size <= 0) {
+			size = SiteMagConstant.pageSize;
+			;
+		}
+
+		map.addAttribute("page", page);
+		map.addAttribute("size", size);
+		map.addAttribute("__EVENTTARGET", __EVENTTARGET);
+		map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
+		map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+
+		Page<TdUserAdvice> suggestionPage = tdUserAdviceService.findAllOrderByAdviceTimeDesc(page, size);
+
+		map.addAttribute("keywords", keywords);
+		map.addAttribute("categoryId", categoryId);
+
+		map.addAttribute("user_suggestion_page", suggestionPage);
+
+		return "/site_mag/user_suggestion_list";
+	}
+	
+	/*----------------用户评价 begin ------------------*/
+	@RequestMapping(value = "/comment/list")
+	public String commentList(Integer page, Integer size, String __EVENTTARGET, Long statusId,String date_1, String date_2, String keywords,
+			Long categoryId, String __EVENTARGUMENT, String __VIEWSTATE, Long[] listId, Integer[] listChkId,
+			Long[] listSortId, ModelMap map, HttpServletRequest req) throws ParseException {
+		String username = (String) req.getSession().getAttribute("manager");
+		if (null == username) {
+			return "redirect:/Verwalter/login";
+		}
+		if (null != __EVENTTARGET) {
+			if (__EVENTTARGET.equalsIgnoreCase("btnPage")) {
+				if (null != __EVENTARGUMENT) {
+					page = Integer.parseInt(__EVENTARGUMENT);
+				}
+			} else if (__EVENTTARGET.equalsIgnoreCase("btnDelete")) {
+				btnDelete("suggestion", listId, listChkId);
+			}
+		}
+
+		if (null == page || page < 0) {
+			page = 0;
+		}
+
+		if (null == size || size <= 0) {
+			size = SiteMagConstant.pageSize;
+			;
+		}
+
+		map.addAttribute("page", page);
+		map.addAttribute("size", size);
+		map.addAttribute("__EVENTTARGET", __EVENTTARGET);
+		map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
+		map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+
+		map.addAttribute("keywords", keywords);
+		map.addAttribute("categoryId", categoryId);
+
+		map.addAttribute("user_comment_page", tdUserCommentService.findAllOrderByIdDesc(page, size));
+		return "/site_mag/user_comment_list";
+	}
+	
 	private void btnDelete(String type, Long[] ids, Integer[] chkIds) {
 		if (null == ids || null == chkIds || ids.length < 1 || chkIds.length < 1 || null == type || "".equals(type)) {
 			return;
@@ -232,6 +327,8 @@ public class TdManagerUserController {
 				if (type.equalsIgnoreCase("user")) // 用户
 				{
 					tdUserService.delete(id);
+				}else if(type.equalsIgnoreCase("suggestion")){
+					tdUserAdviceService.delete(id);
 				}
 			}
 		}

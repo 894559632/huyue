@@ -37,7 +37,7 @@
 			<#if item??>
 				<li class="history_box">
 					<div class="test">
-						<div class="box">
+						<div class="box" onclick="window.location.href='/touch/goods/detail/${item.goodsId?c}'">
 							<img class="history" alt="<#if setting??>${setting.title!''}-</#if>${item.goodsTitle!''}" src="${item.goodsCoverImageUri!''}"/>
 							<div class="text">
 								<p>${item.goodsTitle!''}</p>

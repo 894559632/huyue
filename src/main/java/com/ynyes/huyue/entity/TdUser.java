@@ -92,6 +92,10 @@ public class TdUser {
 	// 是否启用
 	@Column
 	private Boolean isEnable;
+	
+	//抽奖次数
+	@Column
+	private Long lottery;
 
 	// 排序号
 	@Column(scale = 2)
@@ -247,5 +251,13 @@ public class TdUser {
 
 	public void setHeadImgUri(String headImgUri) {
 		this.headImgUri = headImgUri;
+	}
+
+	public Long getLottery() {
+		return lottery;
+	}
+
+	public void setLottery(Long lottery) {
+		this.lottery = lottery;
 	}
 }

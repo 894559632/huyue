@@ -45,7 +45,7 @@
 						<span>${item.receivePhone!''}</span>
 					</p>
 				</div>
-				<a class="address_add" href="/touch/user/add/address?id=${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>修改收货地址">${item.cityTitle!''}${item.detail!''}</a>
+				<a class="address_add" href="/touch/user/add/address?id=${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>修改收货地址">${item.cityTitle!''}-${item.detail!''}</a>
 				<section>
 					<span onclick="base.user.address.setDefault(${item.id?c});" class="default <#if item.isDefault??&&item.isDefault>span_active</#if>">默认地址</span>
 					<span onclick="base.user.address.remove(${item.id?c});" class="delete">删除</span>

@@ -17,7 +17,7 @@
 						</label>
 					</#if>
 				</div>
-				<#if item.orderGoodsList??&&orderGoodsList?size gt 0>
+				<#if item.orderGoodsList??&&item.orderGoodsList?size gt 0>
 					<#list item.orderGoodsList as goods>
 						<#if goods??>
 							<dl>
@@ -33,38 +33,34 @@
 				</#if>
 				<div class="li_all">共<span>${item.orderGoodsList?size!'0'}</span>件商品 合计：￥<span class="sp2"><#if item.totalPrice??>${item.totalPrice?string("0.00")}<#else>0.00</#if></span></div>
 				<div class="li_pay">
-					<a href="#" title="" class="a2">取消订单</a>
-					<a href="#" title="" class="a3">去支付</a>
+					<a href="/touch/order/detail/${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>查看详情" class="a2">查看详情</a>
 					<#if item.statusId??>
-						<#switch item.statusId>
-							<#case 2>
-								<a href="#" title="" class="a2">查看详情</a>
-								<a href="#" title="" class="a2">取消订单</a>
-								<a href="#" title="" class="a3">去支付</a>
-							<#break>
-							<#case 3>
-								<a href="#" title="" class="a2">查看详情</a>
-								<a href="#" title="" class="a2">取消订单</a>
-								<a href="#" title="" class="a2">取消订单</a>
-							<#break>
-							<#case 4>
-								<a href="#" title="" class="a2">查看详情</a>
-								<a href="#" title="" class="a2">取消订单</a>
-								<a href="#" title="" class="a3">确认收货</a>
-							<#break>
-							<#case 5>
-								<a href="#" title="" class="a2">查看详情</a>
-								<a href="#" title="" class="a2">取消订单</a>
-								<a href="#" title="" class="a3">去评价</a>
-							<#break>
-							<#case 6>
-								<a href="#" title="" class="a2">查看详情</a>
-							<#break>
-							<#case 7>
-								<a href="#" title="" class="a2">查看详情</a>
-							<#break>
-						</#switch>
-					</#if>
+							<#switch item.statusId>
+								<#case 1>
+									<a href="/touch/pay?orderId=${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>兑换奖品" class="a3">兑换奖品</a>
+								<#break>
+								<#case 2>
+									<#if item.orderNumber??&&!item.orderNumber?contains("CJDD")>
+										<a href="javascript:cancelOrder(${item.id?c})" title="<#if setting??>${setting.title!''}-</#if>取消订单" class="a2">取消订单</a>
+									</#if>
+									<a href="/touch/pay?orderId=${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>去支付" class="a3">去支付</a>
+								<#break>
+								<#case 3>
+									<#--
+										<a href="javascript:cancelOrder(${item.id?c})" title="<#if setting??>${setting.title!''}-</#if>取消订单" class="a2">取消订单</a>
+									-->
+								<#break>
+								<#case 4>
+									<a href="javascript:signOrder(${item.id?c})" title="<#if setting??>${setting.title!''}-</#if>确认收货" class="a3">确认收货</a>
+								<#break>
+								<#case 5>
+									<a href="/touch/user/order/comment?orderId=${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>" class="a3">去评价</a>
+								<#break>
+								<#case 6>
+									<a href="/touch/user/order/comment?orderId=${item.id?c}" title="<#if setting??>${setting.title!''}-</#if>" class="a3">查看评价</a>
+								<#break>
+							</#switch>
+						</#if>
 				</div>
 			</li>
 		</#if>

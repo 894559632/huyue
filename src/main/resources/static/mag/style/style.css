@@ -35,7 +35,7 @@ a:active{ color:#EA5D0E; text-decoration:none; }
  position: relative;
  padding: 0;
  box-shadow: 0 0 5px #333;}
-.logo{ display:block; float:left; width:180px; height:49px; background:url(logo_backstage.png) no-repeat center; text-indent:-9999px; overflow:hidden; }
+.logo{ display:block; float:left; width:180px; height:49px; background:url(./manage_log.jpg) no-repeat center; text-indent:-9999px; overflow:hidden; }
 /*妞ゅ爼鍎撮懣婊冨礋*/
 .nav{ display:block; float:left; height:100%; border-right:2px solid #2A2B2D; }
 	.nav li{ display:block; float:left; margin:0; padding:0px 15px; border-left:2px solid #2A2B2D; color:#fff; cursor:pointer; font-size:16px; height:49px; line-height:42px; vertical-align:middle; }

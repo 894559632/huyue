@@ -53,23 +53,23 @@
 			<span>${unpay_number!'0'}</span>
 		</#if>
 	</a>
+	<a href="/touch/user/order/list?type=3" title="<#if setting??>${setting.title!''}-</#if>待发货订单" class="a2">
+		<p>待发货</p>
+		<#if uncomment_number??&&uncomment_number!=0>
+			<span>${uncomment_number!'0'}</span>
+		</#if>
+	</a>
 	<a href="/touch/user/order/list?type=4" title="<#if setting??>${setting.title!''}-</#if>待收货订单" class="a2">
 		<p>待收货</p>
 		<#if unsign_number??&&unsign_number!=0>
 			<span>${unsign_number!'0'}</span>
 		</#if>
 	</a>
-	<a href="/touch/user/order/list?type=5" title="<#if setting??>${setting.title!''}-</#if>待评价订单" class="a2">
-		<p>待评价</p>
-		<#if uncomment_number??&&uncomment_number!=0>
-			<span>${uncomment_number!'0'}</span>
-		</#if>
-	</a>
 </div>
 <!-- 全部订单-结束 -->
 <!-- 分类1 -->
 <div class="l_classify1">
-	<a href="#" title=""><p>积分中心</p></a>
+	<a href="/touch/user/point" title="<#if setting??>${setting.title!''}-</#if>积分中心"><p>积分中心</p></a>
 	<a href="/touch/user/collect" title="<#if setting??>${setting.title!''}-</#if>我的收藏"><p>我的收藏</p></a>
 	<a href="/touch/user/visited" title="<#if setting??>${setting.title!''}-</#if>历史记录"><p>历史记录</p></a>
 </div>
@@ -77,14 +77,14 @@
 <!-- 分类2 -->
 <div class="l_classify2">
 	<a href="/touch/user/info" title="<#if setting??>${setting.title!''}-</#if>个人信息"><p>个人信息</p></a>
-	<a href="#" title="<#if setting??>${setting.title!''}-</#if>修改密码"><p>修改密码</p></a>
+	<a href="/touch/user/password" title="<#if setting??>${setting.title!''}-</#if>修改密码"><p>修改密码</p></a>
 	<a href="/touch/user/address" title="<#if setting??>${setting.title!''}-</#if>收货地址"><p>收货地址</p></a>
-	<a href="#" title="<#if setting??>${setting.title!''}-</#if>积分抽奖"><p>积分抽奖</p></a>
+	<a href="/touch/lottery" title="<#if setting??>${setting.title!''}-</#if>积分抽奖"><p>积分抽奖</p></a>
 	<a href="/touch/user/advice" title="<#if setting??>${setting.title!''}-</#if>意见反馈"><p>意见反馈</p></a>
-	<a <#if setting??>href="tel:${setting.qq!''}"</#if> title="<#if setting??>${setting.title!''}-</#if>客服中心"><p>客服中心</p></a>
+	<a <#if setting??>href="tel:${setting.telephone!''}"</#if> title="<#if setting??>${setting.title!''}-</#if>客服中心"><p>客服中心</p></a>
 </div>
 <!-- 分类2-结束 -->
-
+<a href="/touch/logout" style="width:100%;height:1.8rem;color:#ffffff;background:#da251e;display:block;font-size:.3rem;text-align:center;line-height:0.8rem;margin-top:.2rem;">退出登录</a>
 <!-- footer -->
 <section class="footer">
 	<nav>
@@ -109,7 +109,7 @@
 			</span>
 			<label>购物车</label>
 		</a>
-		<a href="#" title="<#if setting??>${setting.title!''}-</#if>抽奖">
+		<a href="/touch/lottery" title="<#if setting??>${setting.title!''}-</#if>抽奖">
 			<span>
 				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/footer_icon04.png"/>
 				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/footer_icon44.png"/>

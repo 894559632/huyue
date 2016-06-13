@@ -72,4 +72,6 @@ public interface TdUserCommentRepo extends
 	 * @注释：
 	 */
     List<TdUserComment> findByDiysiteIdOrderByIdDesc(Long diysiteId);
+
+	TdUserComment findByOrderNumberAndUsernameAndGoodsId(String orderNumber, String username, Long goodsId);
 }

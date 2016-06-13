@@ -188,10 +188,16 @@ public class TdManagerIndexController {
                 for (int i = 0; i < rootMenuList.size(); i++) {
                     TdNavigationMenu rootMenu = rootMenuList.get(i);
 
+                    if(null != rootMenu.getTitle() && "系统设置".equalsIgnoreCase(rootMenu.getTitle())){
+                    	if(!username.equalsIgnoreCase("tdadmin")){
+                    		break;
+                    	}
+                    }
+                    
                     // 取一级菜单列表
                     List<TdNavigationMenu> level0MenuList = tdNavigationMenuService
                             .findByParentIdAndSort(rootMenu.getId());
-
+                    
                     if (null != level0MenuList && level0MenuList.size() > 0) {
                         map.addAttribute("level_" + i + "_menu_list",
                                 level0MenuList);

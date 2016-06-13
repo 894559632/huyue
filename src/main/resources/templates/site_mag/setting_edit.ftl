@@ -102,8 +102,10 @@ $(function () {
         <div class="content-tab-ul-wrap" >
             <ul>
                 <li><a href="javascript:;" onclick="tabs(this);" class="selected">网站基本信息</a></li>
+                <#--
                 <li><a href="javascript:;" onclick="tabs(this);">功能权限设置</a></li>
                 <li><a href="javascript:;" onclick="tabs(this);">网站奖励设置</a></li>
+                -->
                 <li><a href="javascript:;" onclick="tabs(this);">注册用户协议</a></li>
             </ul>
         </div>
@@ -143,6 +145,7 @@ $(function () {
             <div class="photo-list thumb_ImgUrl_show thumb_wxImgUrl_show"></div>
         </dd>
     </dl>
+    <#--
     <dl>
         <dt>ios当前版本</dt>
         <dd>
@@ -182,6 +185,7 @@ $(function () {
             <div class="photo-list thumb_ImgUrl_show thumb_androidImgUrl_show"></div>
         </dd>
     </dl>
+    -->
     <dl>
         <dt>公司名称</dt>
         <dd>
@@ -210,6 +214,7 @@ $(function () {
             <span class="Validform_checktip"></span>
         </dd>
     </dl>
+    <#--
     <dl>
         <dt>客服热线</dt>
         <dd>
@@ -224,6 +229,7 @@ $(function () {
             <span class="Validform_checktip"></span>
         </dd>
     </dl>
+    -->
     <dl>
         <dt>网站备案号</dt>
         <dd>
@@ -260,6 +266,7 @@ $(function () {
         </dd>
     </dl>
 </div>
+<#--
 <div class="tab-content" style="display: none;">
     <dl>
         <dt>开启触屏网站</dt>
@@ -382,6 +389,7 @@ $(function () {
             </dd>
      </dl> 
 </div>    
+-->
 <div class="tab-content" style="display: none;">
     <dl>
         <dt>用户注册协议</dt>

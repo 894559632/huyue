@@ -78,7 +78,7 @@
 <!-- onload  -->
 <form class="onload_box">
 	<select class="regist_city" id="cityId">
-		<option value="0">请选择</option>
+		<option value="0">请选择所在城市</option>
 		<#if city_list??&&city_list?size gt 0>
 			<#list city_list as item>
 				<#if item??>
@@ -103,9 +103,6 @@
 
     <p class="forget_secret"></p>
 
-	<#--
-    <div class="have_account"></div>
-    -->
     <label class="ifaccount">已经拥有账号</label>
     <a class="register" href="/touch/login" title="<#if setting??>${setting.title!''}-</#if>登陆">登录</a>
 </form>

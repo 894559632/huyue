@@ -24,7 +24,7 @@
 	$(function(){
 		drge('.test');
 		choice_pay('.buy_car .box label','label_active');
-		choice_all();
+	 	choice_all();
 	});
 	
 </script>
@@ -42,7 +42,7 @@
 	<#if cart_list??>
 		<#list cart_list as item>
 			<#if item??>
-				<li>
+				<li id="container${item.id?c}">
 					<div class="test">
 						<div class="box">
 							<label onclick="base.cart.selectCart(${item.id?c});" id="${item.id?c}" class="cartLabel"></label>
@@ -58,7 +58,7 @@
 							</div>
 						</div>
 						<input type="hidden" id="unit${item.id?c}" value="<#if item.price??>${item.price?string("0.00")}<#else>0.00</#if>">
-						<div class="dele"></div>
+						<div class="dele" onclick="base.cart.remove(${item.id?c});"></div>
 					</div>
 				</li>
 			</#if>
@@ -76,7 +76,7 @@
 <!-- footer -->
 <section class="footer">
 	<nav>
-		<a href="javascript:void(0);" title="<#if setting??>${setting.title!''}-</#if>首页">
+		<a href="/touch" title="<#if setting??>${setting.title!''}-</#if>首页">
 			<span>
 				<img alt="<#if setting??>${setting.title!''}-</#if>首页" src="/touch/images/footer_icon01.png"/>
 				<img alt="<#if setting??>${setting.title!''}-</#if>首页" src="/touch/images/footer_icon11.png"/>
@@ -97,7 +97,7 @@
 			</span>
 			<label class="active_label">购物车</label>
 		</a>
-		<a href="#" title="<#if setting??>${setting.title!''}-</#if>抽奖">
+		<a href="/touch/lottery" title="<#if setting??>${setting.title!''}-</#if>抽奖">
 			<span>
 				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/footer_icon04.png"/>
 				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/footer_icon44.png"/>

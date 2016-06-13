@@ -345,6 +345,23 @@ function del_goods_comb(obj) {
             </dd>
         </dl>
         <dl>
+            <dt>所属品牌</dt>
+            <dd>
+                <div class="rule-single-select">
+                    <select name="brandId" id="brandId" datatype="*" sucmsg=" ">
+                        <#if !goods??>
+                        <option value="0">请选择品牌...</option>
+                        </#if>
+                        <#if brand_list??>
+                            <#list brand_list as c>
+                                <option value="${c.id?c}" <#if goods??&&goods.brandId?? && goods.brandId==c.id>selected="selected"</#if>>${c.title!""}</option>
+                            </#list>
+                        </#if>
+                    </select>
+                </div>
+            </dd>
+        </dl>
+        <dl>
             <dt>显示状态</dt>
             <dd>
                 <div class="rule-multi-radio multi-radio">
@@ -555,7 +572,6 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">成本价，不在前台显示</span>
             </dd>
         </dl>
-        <#--
         <dl>
             <dt>市场价</dt>
             <dd>
@@ -563,7 +579,6 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">市场价格</span>
             </dd>
         </dl>
-        -->
         <#--
         <dl>
             <dt>包含费用</dt>

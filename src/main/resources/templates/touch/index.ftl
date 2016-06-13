@@ -52,8 +52,8 @@
 <!-- swiper////////////////////////////////////////////////////////////////////// -->
 <!-- search -->
 <section class="search">
-<form>
-	<input type="" name="" id="" value="" placeholder="商品关键字" />
+<form action="/touch/goods" method="POST">
+	<input type="text" name="keywords" placeholder="请输入商品的名称" />
 </form>
 </section>
 <!-- search end-->
@@ -62,8 +62,8 @@
 	<ul class="box">
 		<li class="index_title">
 			<label></label>
-			<a href="#" title=""></a>
-			<span>天天疯抢</span>
+			<a href="/touch/goods/point/list" title="<#if setting??>${setting.title!''}-</#if>天天疯抢"></a>
+			<span onclick="window.location.href='/touch/goods/point/list'">天天疯抢</span>
 		</li>
 		<li class="main_box">
 			<div class="swiper-container">
@@ -72,7 +72,7 @@
 			        	<#list indexRecommend_point_page.content as item>
 			        		<#if item??>
 					            <div class="swiper-slide">
-					            	<a class="recommend_good_box" href="/touch/goods">
+					            	<a class="recommend_good_box" href="/touch/goods/point/detail/${item.id?c}">
 						            	<div>
 						            		<img alt="<#if setting??>${setting.seoTitle!''}-</#if>${item.seoTitle!''}" src="${item.coverImageUri!''}"/>
 						            	</div>
@@ -107,14 +107,14 @@
 <section class="index_nav">
 	<ul class="box">
 		<li>
-			<a href="#" title="">
-				<img alt="" src="/touch/images/nav_icon01.png"/>
+			<a href="/touch/user/point" title="<#if setting??>${setting.title!''}-</#if>积分">
+				<img alt="<#if setting??>${setting.title!''}-</#if>积分" src="/touch/images/nav_icon01.png"/>
 			</a>
 			<p>积分</p>
 		</li>
 		<li>
-			<a href="#" title="">
-				<img alt="" src="/touch/images/nav_icon02.png"/>
+			<a href="/touch/lottery" title="<#if setting??>${setting.title!''}-</#if>抽奖">
+				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/nav_icon02.png"/>
 			</a>
 			<p>抽奖</p>
 		</li>
@@ -139,7 +139,7 @@
 		<li class="index_title">
 			<label></label>
 			<a href="/touch/goods" title="<#if setting??>${setting.title!''}-</#if>更多商品"></a>
-			<span>更多商品</span>
+			<span onclick="window.location.href='/touch/goods'">更多商品</span>
 		</li>
 		<li class="main_box">
 			<div class="left">
@@ -196,7 +196,7 @@
 		<li class="index_title">
 			<label></label>
 			<a href="touch/goods" title="<#if setting??>${setting.title!''}-</#if>更多商品"></a>
-			<span>更多商品</span>
+			<span onclick="window.location.href='/touch/goods'">更多商品</span>
 		</li>
 		<li class="main_box">
 			<#if hot_goods_page??&&hot_goods_page.content??&&hot_goods_page.content?size gt 0>
@@ -241,7 +241,7 @@
 			</span>
 			<label>购物车</label>
 		</a>
-		<a href="#" title="<#if setting??>${setting.title!''}-</#if>抽奖">
+		<a href="/touch/lottery" title="<#if setting??>${setting.title!''}-</#if>抽奖">
 			<span>
 				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/footer_icon04.png"/>
 				<img alt="<#if setting??>${setting.title!''}-</#if>抽奖" src="/touch/images/footer_icon44.png"/>
